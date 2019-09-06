@@ -197,5 +197,5 @@ Route::get('test',function (){
         ->get();*/
 
 });
-
-Route::Resource('/campaign','MP\CampaignController');
+Route::apiResource('campaigns', 'api\CampaignController');
+Route::post('campaigns/recommend','api\CampaignController@campaignRecommend');

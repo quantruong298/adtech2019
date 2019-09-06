@@ -30,11 +30,19 @@
                         <td class="align-middle">{{$adgroup->campaign->name}}</td>
 {{--                        <td class="align-middle">{{$adgroup->period_to}}</td>--}}
 {{--                        <td class="align-middle">{{$adgroup->period_budget}}</td>--}}
-                        <td class="align-middle">{{$adgroup->flag->flag_name}}</td>
+                        <td class="align-middle">
+                            @if($adgroup->flag_id==1)
+                                <i class="material-icons" style="color:green">check</i>
+                            @elseif($adgroup->flag_id==2)
+                                <i class="material-icons" style="color:orangered">delete</i>
+                            @else
+                                <i class="material-icons" style="color:red">block</i>
+                            @endif
+                        </td>
                         <td class="align-middle">
                             <div class="btn-group " >
                                 <button type="button"  class="btn-lg bg-info  m-1 text-white"
-                                        onclick="">
+                                        onclick="editAdGroup('adgroups/{{$adgroup->id}}/edit')">
                                     <i class="fa fa-edit text-white"></i>
                                 </button>
                                 {{--                                                            @if(($campaign->role_id) != (\App\Enums\UserEnums::ADMIN))--}}
@@ -58,7 +66,7 @@
         <div class="modal fade" id="addAdGroup" tabindex="-1" role="dialog" aria-labelledby="createModalLabel"
              aria-hidden="true">
         </div>
-        <div class="modal fade" id="addAdGroup" tabindex="-1" role="dialog" aria-labelledby="createModalLabel"
+        <div class="modal fade" id="editAdGroup" tabindex="-1" role="dialog" aria-labelledby="createModalLabel"
              aria-hidden="true">
         </div>
     </div>

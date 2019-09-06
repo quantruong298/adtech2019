@@ -15,6 +15,7 @@ class CreateAdGroupsDetailTable extends Migration
     {
         Schema::create('ad_groups_detail', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->boolean('status')->nullable();
             $table->dateTime('period_from');
             $table->dateTime('period_to');
             $table->integer('ag_period_budget');

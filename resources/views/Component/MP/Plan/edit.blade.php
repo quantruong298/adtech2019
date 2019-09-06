@@ -1,21 +1,22 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add plan</h5>
+                <h5 class="modal-title">Update plan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="formAddPlan" method="post" action="{{route('plans.store')}}">
+                <form id="formUpdatePlan" method="post" action="plans/{{$plan->id}}">
                     @csrf
                     <div class="form-group row">
                         <label class="col-3 align-middle m-auto">Area Name</label>
                         <input type="text"
                                class="form-control col-9 form-control-user"
+                               value="{{$plan->area_name}}"
                                required name="area_name">
                         <span class="text-danger">
-                            <strong id="error-area-name"></strong>
+                            <strong id="error-name"></strong>
                         </span>
                     </div>
                     <div class="form-group row">
@@ -24,14 +25,13 @@
                             <input class="form-control col-4 form-control-user"
                                    type="date"
                                    name="period_from_date"
-                                   id="campaign-start-day-add">
+                                   id="campaign-start-day-add"
+                                   value="2019-06-05">
                             <input class="form-control col-4 form-control-user"
                                    type="time"
                                    name="period_from_time"
-                                   id="campaign-start-time-add">
-                            <span class="text-danger">
-                                <strong id="error-period-from"></strong>
-                            </span>
+                                   id="campaign-start-time-add"
+                                   value="13:45:00">
                     </div>
                     <div class="form-group row">
                         <label for="example-text-input"
@@ -39,14 +39,13 @@
                         <input class="form-control col-4 form-control-user"
                                type="date"
                                name="period_to_date"
-                               id="campaign-start-day-add">
+                               id="campaign-start-day-add"
+                               value="2019-06-05">
                         <input class="form-control col-4 form-control-user"
                                type="time"
                                name="period_to_time"
-                               id="campaign-start-time-add">
-                        <span class="text-danger">
-                                <strong id="error-period-to"></strong>
-                            </span>
+                               id="campaign-start-time-add"
+                               value="13:45:00">
                     </div>
 {{--                    <div class="form-group row">--}}
 {{--                        <label for="example-text-input"--}}
@@ -69,9 +68,8 @@
                         </span>
                         <select class="col-9 form-control"
                                 name="campaign_id" id="selectCampaign" onchange="getCampaignDetail(this)">
-                            <option disabled selected></option>
                             @foreach($campaigns as $campaign)
-                                <option value="{{$campaign->id}}">
+                                <option value="{{$campaign->id}}" @if($campaign->id==$plan->campaign_id) selected @endif>
                                     {{$campaign->name}}
                                 </option>
                             @endforeach
@@ -96,7 +94,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="storePlan()">Create</button>
+                <button type="button" class="btn btn-primary" onclick="updatePlan()">Update</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>

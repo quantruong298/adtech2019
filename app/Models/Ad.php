@@ -12,7 +12,7 @@ class Ad extends Model
     protected $guarded = [];
     public function adDetail()
     {
-        return $this->hasOne('App\Models\AdDetail');
+        return $this->hasOne('App\Models\AdDetail','id','id');
     }
     public function adGroup()
     {

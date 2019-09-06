@@ -17,7 +17,7 @@ class AdsPerformancesTableSeeder extends Seeder
         $flags = DB::table('flags')->get()->pluck('id')->toArray();
         $ads = DB::table('ads')
             ->join('ads_detail','ads.id','=','ads_detail.id')
-            ->select('ads.id','ads.campaign_id','ads.ad_group_id','ads_detail.period_from','ads_detail.std_bidding_amount')
+            ->select('ads.id','ads.name','ads.campaign_id','ads.ad_group_id','ads_detail.period_from','ads_detail.std_bidding_amount')
             ->get()->toArray();
         $dataPerformancesInsert=[];
         $dataPerformanceDetailInsert=[];
@@ -31,8 +31,11 @@ class AdsPerformancesTableSeeder extends Seeder
                 $impression+=$impressionEachDay = rand(0,100);
                 $dataPerformancesInsert[]=[
                   'campaign_id'=>$ad->campaign_id,
+                  'campaign_name'=>DB::table('campaigns')->select('name')->where('id','=',$ad->campaign_id)->first()->name,
                   'ad_group_id'=>$ad->ad_group_id,
+                  'ad_group_name'=>DB::table('ad_groups')->select('name')->where('id','=',$ad->ad_group_id)->first()->name,
                   'ads_id'=>$ad->id,
+                  'ads_name'=>$ad->name,
                   'report_datetime'=>$reportDate->add(new DateInterval('P1D'))->format('Y-m-d'),
                   'flag_id'=>$faker->randomElement($flags)
                 ];

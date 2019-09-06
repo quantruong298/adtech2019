@@ -17,25 +17,26 @@ class CampaignPerformancesTableSeeder extends Seeder
         DB::table('campaign_performance_detail')->truncate();
         $faker = Faker\Factory::create();
         $flags = DB::table('flags')->get()->pluck('id')->toArray();
-        $campaignIds = DB::table('ad_groups_performances')
-            ->groupBy('campaign_id')->select('campaign_id')->get()->pluck('campaign_id')->toArray();
+        $campaigns = DB::table('ad_groups_performances')
+            ->groupBy('campaign_id')->select('campaign_id','campaign_name')->get();
         $dataPerformancesInsert=[];
         $dataPerformanceDetailInsert=[];
-        foreach ($campaignIds as $campaignId){
+        foreach ($campaigns as $campaign){
             $reportDates = DB::table('ad_groups_performances')
-                ->where('campaign_id','=',$campaignId)
+                ->where('campaign_id','=',$campaign->campaign_id)
                 ->groupBy('report_datetime')
                 ->select('report_datetime')->get()->pluck('report_datetime')->toArray();
             foreach ($reportDates as $reportDate){
                 $dataPerformancesInsert[]=[
-                    'campaign_id'=>$campaignId,
+                    'campaign_id'=>$campaign->campaign_id,
+                    'campaign_name'=>$campaign->campaign_name,
                     'report_datetime'=>$reportDate,
                     'flag_id'=>$faker->randomElement($flags)
                 ];
                 $reports = DB::table('ad_groups_performances')
                     ->join('ad_groups_performance_detail','ad_groups_performances.id','=','ad_groups_performance_detail.id')
                     ->where('report_datetime','=',$reportDate)
-                    ->where('campaign_id','=',$campaignId);
+                    ->where('campaign_id','=',$campaign->campaign_id);
                 $dataPerformanceDetailInsert[]=[
                     'actual_impressions' => $reports ->sum('actual_impressions'),
                     'actual_cost' => $reports ->sum('actual_cost'),

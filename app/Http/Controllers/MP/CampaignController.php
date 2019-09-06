@@ -5,6 +5,8 @@ namespace App\Http\Controllers\MP;
 use App\Enums\Pagination;
 use App\Helpers\DateTime;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MP\StoreCampaign;
+use App\Http\Requests\MP\UpdateCampaign;
 use App\Models\Advertiser;
 use App\Models\BiddingMethod;
 use App\Models\BudgetType;
@@ -48,7 +50,7 @@ class CampaignController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCampaign $request)
     {
         $campaign = new Campaign();
         $campaign->name=$request->name;
@@ -104,7 +106,7 @@ class CampaignController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCampaign $request, $id)
     {
         $campaign = Campaign::find($id);
         $campaign->name=$request->name;

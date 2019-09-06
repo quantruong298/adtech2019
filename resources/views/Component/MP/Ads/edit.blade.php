@@ -1,13 +1,13 @@
 <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
         <div class="modal-header text-center">
-            <h4 class="modal-title w-100 font-weight-bold text-primary ml-5">Create New Ad</h4>
+            <h4 class="modal-title w-100 font-weight-bold text-primary ml-5">Update Ad</h4>
             <button type="button" class="close text-primary" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="modal-body mx-3">
-            <form method="POST" id="formAddAd" enctype="multipart/form-data" action="{{route('ads.store')}}">
+            <form method="POST" id="formUpdateAd" enctype="multipart/form-data" action="ads/{{$ad->id}}">
                 @csrf
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
@@ -31,6 +31,7 @@
                                             <input class="form-control"
                                                    type="text"
                                                    name="name"
+                                                   value="{{$ad->name}}"
                                                    id="ad-name-add">
                                             <span class="text-danger">
                                                   <strong id="error-name"></strong>
@@ -57,9 +58,8 @@
                                             <select class="form-control"
                                                     name="ad_group_id"
                                                     id="ad-adgroup-id-add">
-                                                <option disabled selected>Choose AdGroup</option>
                                                 @foreach($adgroups as $adgroup)
-                                                    <option value="{{$adgroup->id}}">{{$adgroup->name}}</option>
+                                                    <option value="{{$adgroup->id}}" @if($adgroup->id==$ad->ad_group_id) selected @endif>{{$adgroup->name}}</option>
                                                 @endforeach
                                             </select>
                                             <span class="text-danger">
@@ -92,6 +92,7 @@
                                             <input class="form-control"
                                                    type="text"
                                                    name="creative_preview"
+                                                   value="{{$ad->adDetail->creative_preview}}"
                                                    id="ad-creative-preview-add">
                                             <span class="text-danger">
                                                   <strong id="error-creative-preview"></strong>
@@ -105,9 +106,8 @@
                                             <select class="form-control"
                                                     name="creative_type_id"
                                                     id="ad-objective-add">
-                                                <option disabled selected>Choose creative type</option>
                                                 @foreach($creativeTypes as $creativeType)
-                                                    <option value="{{$creativeType->id}}">{{$creativeType->name}}</option>
+                                                    <option value="{{$creativeType->id}}" @if($creativeType->id==$ad->adDetail->creative_type_id) selected @endif>{{$creativeType->name}}</option>
                                                 @endforeach
                                             </select>
                                             <span class="text-danger">
@@ -142,11 +142,13 @@
                                             <input class="form-control"
                                                    type="text"
                                                    name="cost_bidding"
-                                                   id="ad-kpi-add">
+                                                   id="ad-kpi-add"
+                                                    value="{{$ad->adDetail->cost_bidding}} ">
                                             <span class="text-danger">
                                                   <strong id="error-cost-bidding"></strong>
                                             </span>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -173,17 +175,19 @@
                                             <input class="form-control"
                                                    type="date"
                                                    name="period_from_date"
-                                                   id="ad-start-day-add">
+                                                   id="ad-start-day-add"
+                                                   value="2019-06-05">
+                                            <span class="text-danger">
+                                                  <strong id="error-period-from"></strong>
+                                            </span>
                                         </div>
                                         <div class="col-4">
                                             <input class="form-control"
                                                    type="time"
                                                    name="period_from_time"
-                                                   id="ad-start-time-add">
+                                                   id="ad-start-time-add"
+                                                   value="13:45:00">
                                         </div>
-                                        <span class="text-danger">
-                                                  <strong id="error-period-from"></strong>
-                                            </span>
                                     </div>
                                     <div class="form-group row">
                                         <label for="example-text-input"
@@ -192,13 +196,15 @@
                                             <input class="form-control"
                                                    type="date"
                                                    name="period_to_date"
-                                                   id="ad-end-day-add">
+                                                   id="ad-end-day-add"
+                                                   value="2019-06-17">
                                         </div>
                                         <div class="col-4">
                                             <input class="form-control"
                                                    type="time"
                                                    name="period_to_time"
-                                                   id="ad-end-time-add">
+                                                   id="ad-end-time-add"
+                                                   value="13:45:00">
                                         </div>
                                         <span class="text-danger">
                                                   <strong id="error-period-to"></strong>
@@ -233,6 +239,7 @@
                                                 <input type="number" class="form-control"
                                                        aria-describedby="basic-addon1"
                                                        name="ads_period_budget"
+                                                       value="{{$ad->adDetail->ads_period_budget}}"
                                                        id="ad-period-budget-add">
                                                 <span class="text-danger">
                                                   <strong id="error-period-budget"></strong>
@@ -251,6 +258,7 @@
                                                 <input type="number" class="form-control"
                                                        aria-describedby="basic-addon1"
                                                        name="ads_period_budget_from"
+                                                       value="{{$ad->adDetail->ads_period_budget_from}}"
                                                        id="ad-period-budget-add">
                                                 <span class="text-danger">
                                                   <strong id="error-period-budget-from"></strong>
@@ -269,6 +277,7 @@
                                                 <input type="number" class="form-control"
                                                        aria-describedby="basic-addon1"
                                                        name="ads_period_budget_to"
+                                                       value="{{$ad->adDetail->ads_period_budget_to}}"
                                                        id="ad-period-budget-add">
                                                 <span class="text-danger">
                                                   <strong id="error-period-budget-to"></strong>
@@ -287,6 +296,7 @@
                                                 <input type="number" class="form-control"
                                                        aria-describedby="basic-addon1"
                                                        name="std_daily_budget"
+                                                       value="{{$ad->adDetail->std_daily_budget}}"
                                                        id="ad-daily-budget-add">
                                                 <span class="text-danger">
                                                   <strong id="error-daily-budget"></strong>
@@ -323,6 +333,7 @@
                                                 <input type="number" class="form-control"
                                                        aria-describedby="basic-addon1"
                                                        name="std_bidding_amount"
+                                                       value="{{$ad->adDetail->std_bidding_amount}}"
                                                        id="ad-daily-budget-add">
                                                 <span class="text-danger">
                                                   <strong id="error-bidding-amount"></strong>
@@ -404,7 +415,7 @@
                 </div>
                 <div class="form-group">
                     <button type="button" class="btn btn-primary btn-block"
-                            id="submitFormAdd" onclick="storeAd()">CREATE
+                            id="submitFormAdd" onclick="updateAd()">UPDATE
                     </button>
                 </div>
             </form>

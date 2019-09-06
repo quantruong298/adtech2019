@@ -18,7 +18,7 @@ class AdGroupPerformancesTableSeeder extends Seeder
         $faker = Faker\Factory::create();
         $flags = DB::table('flags')->get()->pluck('id')->toArray();
         $adGroups = DB::table('ads_performances')
-            ->groupBy('ad_group_id')->select('campaign_id','ad_group_id')->get();
+            ->groupBy('ad_group_id')->select('campaign_id','campaign_name','ad_group_id','ad_group_name')->get();
         $dataPerformancesInsert=[];
         $dataPerformanceDetailInsert=[];
         foreach ($adGroups as $adGroup){
@@ -30,7 +30,9 @@ class AdGroupPerformancesTableSeeder extends Seeder
             foreach ($reportDates as $reportDate){
                 $dataPerformancesInsert[]=[
                     'campaign_id'=>$adGroup->campaign_id,
+                    'campaign_name'=>$adGroup->campaign_name,
                     'ad_group_id'=>$adGroup->ad_group_id,
+                    'ad_group_name'=>$adGroup->ad_group_name,
                     'report_datetime'=>$reportDate,
                     'flag_id'=>$faker->randomElement($flags)
                 ];

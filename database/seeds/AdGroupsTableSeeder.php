@@ -28,6 +28,7 @@ class AdGroupsTableSeeder extends Seeder
             $adGroupPeriodBudget = rand(100000000,$campaign->campaign_period_budget);
             $adGroupPeriodBudgetFrom = rand(10000000,$adGroupPeriodBudget);
             $dataAdGroupsDetailInsert[]=[
+              'status'=>0,
               'period_from'=>$periodFrom,
               'period_to'=>$faker->dateTimeBetween($periodFrom,$campaign->period_to),
               'ag_period_budget'=> $adGroupPeriodBudget,

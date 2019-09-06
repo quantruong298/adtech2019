@@ -41,7 +41,15 @@
                     <td class="align-middle">{{$campaign->campaignDetail->period_to}}</td>
                     <td class="align-middle">{{$campaign->campaignDetail->campaign_period_budget}}</td>
 {{--                    <td class="align-middle">{{$campaign->standard_daily_budget}}</td>--}}
-                    <td class="align-middle">{{$campaign->flag->flag_name}}</td>
+                    <td class="align-middle">
+                        @if($campaign->flag_id==1)
+                            <i class="material-icons" style="color:green">check</i>
+                        @elseif($campaign->flag_id==2)
+                            <i class="material-icons" style="color:orangered">delete</i>
+                        @else
+                            <i class="material-icons" style="color:red">block</i>
+                        @endif
+                    </td>
                     <td class="align-middle">
                         <div class="btn-group " >
                             <button type="button"  class="btn-lg bg-info  m-1 text-white"

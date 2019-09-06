@@ -19,6 +19,7 @@ class CampaignsDetailTableSeeder extends Seeder
         $stdBiddingMethodIds = DB::table('std_bidding_methods')->pluck('id')->toArray();
         for ($i = 0; $i < 20; $i++) {
             $dataInsert[] = [
+                'status'=>0,
                 'kpi'=> rand(10000,10000000),
                 'objective_id' => $faker->randomElement($objectiveIds),
                 'period_from' => $faker->dateTimeBetween('-40 days', '-20 days'),

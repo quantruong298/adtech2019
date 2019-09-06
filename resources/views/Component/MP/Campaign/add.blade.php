@@ -32,6 +32,9 @@
                                                            type="text"
                                                            name="name"
                                                            id="campaign-name-add">
+                                                    <span class="text-danger">
+                                                        <strong id="error-name"></strong>
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -41,10 +44,14 @@
                                                     <select class="form-control"
                                                             name="media_id"
                                                             id="campaign-media-add">
+                                                        <option disabled selected>Choose media</option>
                                                         @foreach($medias as $media)
                                                             <option value="{{$media->id}}">{{$media->name}}</option>
                                                         @endforeach
                                                     </select>
+                                                    <span class="text-danger">
+                                                        <strong id="error-media"></strong>
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -54,10 +61,14 @@
                                                     <select class="form-control"
                                                             name="advertiser_email"
                                                             id="campaign-advertiser-add">
+                                                        <option disabled selected>Choose advertiser</option>
                                                         @foreach($advertisers as $advertiser)
                                                             <option value="{{$advertiser->email}}">{{$advertiser->email}}</option>
                                                         @endforeach
                                                     </select>
+                                                    <span class="text-danger">
+                                                        <strong id="error-advertiser"></strong>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -86,6 +97,9 @@
                                                            type="text"
                                                            name="kpi"
                                                            id="campaign-kpi-add">
+                                                    <span class="text-danger">
+                                                        <strong id="error-kpi"></strong>
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -95,10 +109,14 @@
                                                     <select class="form-control"
                                                             name="objective_id"
                                                             id="campaign-objective-add">
+                                                        <option disabled selected>Choose objective</option>
                                                         @foreach($objectives as $objective)
                                                             <option value="{{$objective->id}}">{{$objective->name}}</option>
                                                         @endforeach
                                                     </select>
+                                                    <span class="text-danger">
+                                                        <strong id="error-objective"></strong>
+                                                    </span>
                                                 </div>
                                             </div>
 
@@ -127,16 +145,17 @@
                                                     <input class="form-control"
                                                            type="date"
                                                            name="period_from_date"
-                                                           id="campaign-start-day-add"
-                                                           value="2019-06-05">
+                                                           id="campaign-start-day-add">
                                                 </div>
                                                 <div class="col-4">
                                                     <input class="form-control"
                                                            type="time"
                                                            name="period_from_time"
-                                                           id="campaign-start-time-add"
-                                                           value="13:45:00">
+                                                           id="campaign-start-time-add">
                                                 </div>
+                                                <span class="text-danger">
+                                                     <strong id="error-period-from"></strong>
+                                                </span>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="example-text-input"
@@ -145,16 +164,17 @@
                                                     <input class="form-control"
                                                            type="date"
                                                            name="period_to_date"
-                                                           id="campaign-end-day-add"
-                                                           value="2019-06-17">
+                                                           id="campaign-end-day-add">
                                                 </div>
                                                 <div class="col-4">
                                                     <input class="form-control"
                                                            type="time"
                                                            name="period_to_time"
-                                                           id="campaign-end-time-add"
-                                                           value="13:45:00">
+                                                           id="campaign-end-time-add">
                                                 </div>
+                                                <span class="text-danger">
+                                                        <strong id="error-period-to"></strong>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -181,10 +201,14 @@
                                                     <select class="form-control"
                                                             name="budget_type_id"
                                                             id="campaign-budget-type-add">
+                                                        <option disabled selected>Choose budget type</option>
                                                         @foreach($budgetTypes as $budgetType)
                                                             <option value="{{$budgetType->id}}">{{$budgetType->name}}</option>
                                                         @endforeach
                                                     </select>
+                                                    <span class="text-danger">
+                                                        <strong id="error-budget-type"></strong>
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -199,6 +223,9 @@
                                                                aria-describedby="basic-addon1"
                                                                name="campaign_period_budget"
                                                                id="campaign-period-budget-add">
+                                                        <span class="text-danger">
+                                                           <strong id="error-period-budget"></strong>
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -214,6 +241,9 @@
                                                                aria-describedby="basic-addon1"
                                                                name="std_daily_budget"
                                                                id="campaign-daily-budget-add">
+                                                        <span class="text-danger">
+                                                           <strong id="error-daily-budget"></strong>
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -242,10 +272,14 @@
                                                     <select class="form-control"
                                                             name="std_bidding_method_id"
                                                             id="campaign-bidding-method-add">
+                                                        <option disabled selected>Choose bidding method</option>
                                                         @foreach($biddingMethods as $biddingMethod)
                                                             <option value="{{$biddingMethod->id}}">{{$biddingMethod->name}}</option>
                                                         @endforeach
                                                     </select>
+                                                    <span class="text-danger">
+                                                           <strong id="error-bidding-method"></strong>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>

@@ -25,14 +25,22 @@
             <td class="align-middle">{{$adgroup->id }}</td>
             <td class="align-middle">{{$adgroup->name }}</td>
             <td class="align-middle">{{$adgroup->campaign->name }}</td>
-            <td class="align-middle">{{$adgroup->flag->flag_name }}</td>
+            <td class="align-middle">
+                @if($adgroup->flag_id==1)
+                    <i class="material-icons" style="color:green">check</i>
+                @elseif($adgroup->flag_id==2)
+                    <i class="material-icons" style="color:orangered">delete</i>
+                @else
+                    <i class="material-icons" style="color:red">block</i>
+                @endif
+            </td>
 {{--            <td class="align-middle">{{$adgroup->period_from}}</td>--}}
 {{--            <td class="align-middle">{{$adgroup->period_to}}</td>--}}
 {{--            <td class="align-middle">{{$adgroup->period_budget}}</td>--}}
             <td class="align-middle">
                 <div class="btn-group " >
                     <button type="button"  class="btn-lg bg-info  m-1 text-white"
-                            onclick="">
+                            onclick="editAdGroup('mp/adgroups/{{$adgroup->id}}/edit')">
                         <i class="fa fa-edit text-white"></i>
                     </button>
                     {{--                                                            @if(($campaign->role_id) != (\App\Enums\UserEnums::ADMIN))--}}
@@ -52,6 +60,12 @@
 <div class="clearfix mx-auto"></div>
 <div class="pagination-list-user justify-content-center d-flex">
     <div class="m-auto align-content-center align-items-center">{{$adgroups->links()}}</div>
+</div>
+<div class="row d-flex justify-content-center modalWrapper">
+    <div class="modal fade addNewInputs" id="editAdGroup" tabindex="-1" role="dialog"
+         aria-labelledby="editModal"
+         aria-hidden="true">
+    </div>
 </div>
 @else
     <h2>Empty!</h2>

@@ -16,6 +16,7 @@ CreateCampaignsDetailTable extends Migration
     {
         Schema::create('campaigns_detail', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->boolean('status')->nullable();
             $table->integer('kpi')->nullable();
             $table->tinyInteger('objective_id');
             $table->dateTime('period_from');

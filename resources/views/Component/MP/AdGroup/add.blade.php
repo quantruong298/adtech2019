@@ -32,6 +32,9 @@
                                                    type="text"
                                                    name="name"
                                                    id="adgroup-name-add">
+                                            <span class="text-danger">
+                                                  <strong id="error-name"></strong>
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -41,10 +44,14 @@
                                             <select class="form-control"
                                                     name="campaign_id"
                                                     id="adgroup-media-add">
+                                                <option disabled selected>Choose campaign</option>
                                                 @foreach($campaigns as $campaign)
                                                     <option value="{{$campaign->id}}">{{$campaign->name}}</option>
                                                 @endforeach
                                             </select>
+                                            <span class="text-danger">
+                                                  <strong id="error-campaign"></strong>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -72,16 +79,17 @@
                                             <input class="form-control"
                                                    type="date"
                                                    name="period_from_date"
-                                                   id="adgroup-start-day-add"
-                                                   value="2019-06-05">
+                                                   id="adgroup-start-day-add">
                                         </div>
                                         <div class="col-4">
                                             <input class="form-control"
                                                    type="time"
                                                    name="period_from_time"
-                                                   id="adgroup-start-time-add"
-                                                   value="13:45:00">
+                                                   id="adgroup-start-time-add">
                                         </div>
+                                        <span class="text-danger">
+                                            <strong id="error-period-from"></strong>
+                                        </span>
                                     </div>
                                     <div class="form-group row">
                                         <label for="example-text-input"
@@ -90,16 +98,17 @@
                                             <input class="form-control"
                                                    type="date"
                                                    name="period_to_date"
-                                                   id="adgroup-end-day-add"
-                                                   value="2019-06-17">
+                                                   id="adgroup-end-day-add">
                                         </div>
                                         <div class="col-4">
                                             <input class="form-control"
                                                    type="time"
                                                    name="period_to_time"
-                                                   id="adgroup-end-time-add"
-                                                   value="13:45:00">
+                                                   id="adgroup-end-time-add">
                                         </div>
+                                        <span class="text-danger">
+                                            <strong id="error-period-to"></strong>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -131,6 +140,9 @@
                                                        aria-describedby="basic-addon1"
                                                        name="adgroup_period_budget"
                                                        id="adgroup-period-budget-add">
+                                                <span class="text-danger">
+                                                    <strong id="error-period-budget"></strong>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -146,6 +158,9 @@
                                                        aria-describedby="basic-addon1"
                                                        name="adgroup_period_budget_from"
                                                        id="adgroup-period-budget-add">
+                                                <span class="text-danger">
+                                                    <strong id="error-period-budget-from"></strong>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -161,6 +176,9 @@
                                                        aria-describedby="basic-addon1"
                                                        name="adgroup_period_budget_to"
                                                        id="adgroup-period-budget-add">
+                                                <span class="text-danger">
+                                                    <strong id="error-period-budget-to"></strong>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -176,6 +194,9 @@
                                                        aria-describedby="basic-addon1"
                                                        name="std_daily_budget"
                                                        id="adgroup-daily-budget-add">
+                                                <span class="text-danger">
+                                                    <strong id="error-daily-budget"></strong>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -209,6 +230,9 @@
                                                        aria-describedby="basic-addon1"
                                                        name="std_bidding_amount"
                                                        id="adgroup-std-bidding-amount-add">
+                                                <span class="text-danger">
+                                                    <strong id="error-bidding-amount"></strong>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>

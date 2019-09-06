@@ -16,6 +16,7 @@ class CreateCampaignPerformancesTable extends Migration
         Schema::create('campaign_performances', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('campaign_id');
+            $table->string('campaign_name');
             $table->dateTime('report_datetime');
             $table->tinyInteger('flag_id');
         });

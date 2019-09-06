@@ -7,7 +7,7 @@
             </button>
         </div>
         <div class="modal-body mx-3">
-            <form method="POST" id="formUpdateAdGroup" enctype="multipart/form-data" action="adgroup/{{$adgroup->id}}">
+            <form method="POST" id="formUpdateAdGroup" enctype="multipart/form-data" action="adgroups/{{$adgroup->id}}">
                 @csrf
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
@@ -31,7 +31,11 @@
                                             <input class="form-control"
                                                    type="text"
                                                    name="name"
+                                                   value="{{$adgroup->name}}"
                                                    id="adgroup-name-add">
+                                            <span class="text-danger">
+                                                  <strong id="error-name"></strong>
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -42,9 +46,12 @@
                                                     name="campaign_id"
                                                     id="adgroup-media-add">
                                                 @foreach($campaigns as $campaign)
-                                                    <option value="{{$campaign->id}}">{{$campaign->name}}</option>
+                                                    <option value="{{$campaign->id}}" @if($campaign->id==$adgroup->campaign_id) selected @endif>{{$campaign->name}}</option>
                                                 @endforeach
                                             </select>
+                                            <span class="text-danger">
+                                                  <strong id="error-campaign"></strong>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -82,6 +89,9 @@
                                                    id="adgroup-start-time-add"
                                                    value="13:45:00">
                                         </div>
+                                        <span class="text-danger">
+                                                  <strong id="error-period-from"></strong>
+                                            </span>
                                     </div>
                                     <div class="form-group row">
                                         <label for="example-text-input"
@@ -100,6 +110,9 @@
                                                    id="adgroup-end-time-add"
                                                    value="13:45:00">
                                         </div>
+                                        <span class="text-danger">
+                                                  <strong id="error-period-to"></strong>
+                                            </span>
                                     </div>
                                 </div>
                             </div>
@@ -129,8 +142,12 @@
                                                 </div>
                                                 <input type="number" class="form-control"
                                                        aria-describedby="basic-addon1"
-                                                       name="adgroup_period_budget"
-                                                       id="adgroup-period-budget-add">
+                                                       name="ag_period_budget"
+                                                       value="{{$adgroup->adgroupDetail->ag_period_budget}}"
+                                                       id="ag-period-budget-add">
+                                                <span class="text-danger">
+                                                  <strong id="error-period-budget"></strong>
+                                            </span>
                                             </div>
                                         </div>
                                     </div>
@@ -144,8 +161,12 @@
                                                 </div>
                                                 <input type="number" class="form-control"
                                                        aria-describedby="basic-addon1"
-                                                       name="adgroup_period_budget_from"
-                                                       id="adgroup-period-budget-add">
+                                                       name="ag_period_budget_from"
+                                                       value="{{$adgroup->adgroupDetail->ag_period_budget_from}}"
+                                                       id="ag-period-budget-add">
+                                                <span class="text-danger">
+                                                  <strong id="error-period-budget-from"></strong>
+                                            </span>
                                             </div>
                                         </div>
                                     </div>
@@ -159,8 +180,12 @@
                                                 </div>
                                                 <input type="number" class="form-control"
                                                        aria-describedby="basic-addon1"
-                                                       name="adgroup_period_budget_to"
+                                                       name="ag_period_budget_to"
+                                                       value="{{$adgroup->adgroupDetail->ag_period_budget_to}}"
                                                        id="adgroup-period-budget-add">
+                                                <span class="text-danger">
+                                                  <strong id="error-period-budget-to"></strong>
+                                            </span>
                                             </div>
                                         </div>
                                     </div>
@@ -175,7 +200,11 @@
                                                 <input type="number" class="form-control"
                                                        aria-describedby="basic-addon1"
                                                        name="std_daily_budget"
+                                                       value="{{$adgroup->adgroupDetail->std_daily_budget}}"
                                                        id="adgroup-daily-budget-add">
+                                                <span class="text-danger">
+                                                  <strong id="error-daily-budget"></strong>
+                                            </span>
                                             </div>
                                         </div>
                                     </div>
@@ -208,7 +237,11 @@
                                                 <input type="number" class="form-control"
                                                        aria-describedby="basic-addon1"
                                                        name="std_bidding_amount"
+                                                       value="{{$adgroup->adgroupDetail->std_bidding_amount}}"
                                                        id="adgroup-std-bidding-amount-add">
+                                                <span class="text-danger">
+                                                  <strong id="error-bidding-amount"></strong>
+                                            </span>
                                             </div>
                                         </div>
                                     </div>
@@ -286,7 +319,7 @@
                 </div>
                 <div class="form-group">
                     <button type="button" class="btn btn-primary btn-block"
-                            id="submitFormAdd" onclick="storeAdGroup()">CREATE
+                            id="submitFormAdd" onclick="updateAdGroup()">UPDATE
                     </button>
                 </div>
             </form>

@@ -3,7 +3,14 @@
 namespace App\Http\Controllers\MP;
 
 use App\Enums\Pagination;
+use App\Helpers\DateTime;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\MP\StoreAd;
+use App\Http\Requests\MP\UpdateAd;
 use App\Models\Ad;
+use App\Models\AdDetail;
+use App\Models\AdGroup;
+use App\Models\AdGroupDetail;
 use App\Models\Campaign;
 use App\Models\CreativeType;
 use Illuminate\Http\Request;
@@ -28,9 +35,9 @@ class AdController extends Controller
      */
     public function create()
     {
-        $campaigns = Campaign::all();
+        $adgroups = AdGroup::all();
         $creativeTypes = CreativeType::all();
-        return view('Component.MP.Ads.add',compact('campaigns','creativeTypes'));
+        return view('Component.MP.Ads.add',compact('adgroups','creativeTypes'));
     }
 
     /**
@@ -39,10 +46,30 @@ class AdController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAd $request)
     {
         $ad = new Ad();
-        $ad->name = $request;
+        $ad->name = $request->name;
+        $ad->campaign_id = AdGroup::find($request->ad_group_id)->campaign_id;
+        $ad->ad_group_id = $request->ad_group_id;
+        $ad->flag_id = 1;
+        $ad->save();
+        $adDetail = new AdDetail();
+        $adDetail->creative_preview = $request->creative_preview;
+        $adDetail->creative_type_id = $request->creative_type_id;
+        $adDetail->spent = 111;
+        $adDetail->click_through_rate = 111;
+        $adDetail->cost_bidding = $request->cost_bidding;
+        $adDetail->period_from = Datetime::handlerDateTime($request->period_from_date, $request->period_from_time);
+        $adDetail->period_to=Datetime::handlerDateTime($request->period_to_date, $request->period_to_time);
+        $adDetail->ads_period_budget = $request->ads_period_budget;
+        $adDetail->ads_period_budget_from = $request->ads_period_budget_from;
+        $adDetail->ads_period_budget_to = $request->ads_period_budget_to;
+        $adDetail->std_daily_budget = $request->std_daily_budget;
+        $adDetail->std_bidding_method_id = AdGroupDetail::find($request->ad_group_id)->std_bidding_method_id;
+        $adDetail->std_bidding_amount = $request->std_daily_budget;
+        $ad->adDetail()->save($adDetail);
+        return $ad->name;
     }
 
     /**
@@ -64,7 +91,10 @@ class AdController extends Controller
      */
     public function edit($id)
     {
-        //
+        $adgroups = AdGroup::all();
+        $creativeTypes = CreativeType::all();
+        $ad = Ad::find($id);
+        return view('Component.MP.Ads.edit',compact('adgroups','creativeTypes','ad'));
     }
 
     /**
@@ -74,9 +104,30 @@ class AdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateAd $request, $id)
     {
-        //
+        $ad = Ad::find($id);
+        $ad->name = $request->name;
+        $ad->campaign_id = AdGroup::find($request->ad_group_id)->campaign_id;
+        $ad->ad_group_id = $request->ad_group_id;
+        $ad->flag_id = 1;
+        $ad->save();
+        $adDetail = AdDetail::find($id);
+        $adDetail->creative_preview = $request->creative_preview;
+        $adDetail->creative_type_id = $request->creative_type_id;
+        $adDetail->spent = 111;
+        $adDetail->click_through_rate = 111;
+        $adDetail->cost_bidding = $request->cost_bidding;
+        $adDetail->period_from = Datetime::handlerDateTime($request->period_from_date, $request->period_from_time);
+        $adDetail->period_to=Datetime::handlerDateTime($request->period_to_date, $request->period_to_time);
+        $adDetail->ads_period_budget = $request->ads_period_budget;
+        $adDetail->ads_period_budget_from = $request->ads_period_budget_from;
+        $adDetail->ads_period_budget_to = $request->ads_period_budget_to;
+        $adDetail->std_daily_budget = $request->std_daily_budget;
+        $adDetail->std_bidding_method_id = AdGroupDetail::find($request->ad_group_id)->std_bidding_method_id;
+        $adDetail->std_bidding_amount = $request->std_daily_budget;
+        $ad->adDetail()->save($adDetail);
+        return $ad->name;
     }
 
     /**

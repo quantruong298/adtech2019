@@ -17,7 +17,7 @@ class CreateMpPlansTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('media_id');
             $table->bigInteger('campaign_id');
-            $table->bigInteger('ad_group_id');
+            $table->bigInteger('ad_group_id')->nullable();
             $table->string('area_name');
             $table->dateTime('period_from');
             $table->dateTime('period_to');

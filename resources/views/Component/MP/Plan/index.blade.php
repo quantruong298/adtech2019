@@ -16,7 +16,7 @@
                 <th>#</th>
                 <th>Media</th>
                 <th>Campaign's Name</th>
-                <th>AdGroup's Name</th>
+{{--                <th>AdGroup's Name</th>--}}
                 <th>Area Name</th>
                 <th>Period From</th>
                 <th>Period To</th>
@@ -29,15 +29,23 @@
                         <td class="align-middle">{{$plan->id }}</td>
                         <td class="align-middle">{{$plan->media->name}}</td>
                         <td class="align-middle">{{$plan->campaign->name }}</td>
-                        <td class="align-middle">{{$plan->adGroup->name }}</td>
+{{--                        <td class="align-middle">{{$plan->adGroup->name }}</td>--}}
                         <td class="align-middle">{{$plan->area_name }}</td>
                         <td class="align-middle">{{$plan->period_from }}</td>
                         <td class="align-middle">{{$plan->period_to}}</td>
-                        <td class="align-middle">{{$plan->flag->flag_name}}</td>
+                        <td class="align-middle">
+                            @if($plan->flag_id==1)
+                                <i class="material-icons" style="color:green">check</i>
+                            @elseif($plan->flag_id==2)
+                                <i class="material-icons" style="color:orangered">delete</i>
+                            @else
+                                <i class="material-icons" style="color:red">block</i>
+                            @endif
+                        </td>
                         <td class="align-middle">
                             <div class="btn-group " >
                                 <button type="button"  class="btn-lg bg-info  m-1 text-white"
-                                        onclick="">
+                                        onclick="editPlan('plans/{{$plan->id}}/edit')">
                                     <i class="fa fa-edit text-white"></i>
                                 </button>
                                 {{--                                                            @if(($campaign->role_id) != (\App\Enums\UserEnums::ADMIN))--}}
@@ -59,6 +67,9 @@
             <div class="m-auto align-content-center align-items-center">{{$plans->links()}}</div>
         </div>
         <div class="modal fade" id="addPlan" tabindex="-1" role="dialog" aria-labelledby="createModalLabel"
+             aria-hidden="true">
+        </div>
+        <div class="modal fade" id="editPlan" tabindex="-1" role="dialog" aria-labelledby="createModalLabel"
              aria-hidden="true">
         </div>
     </div>
