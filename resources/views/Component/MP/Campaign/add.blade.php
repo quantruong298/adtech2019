@@ -146,16 +146,20 @@
                                                            type="date"
                                                            name="period_from_date"
                                                            id="campaign-start-day-add">
+                                                    <span class="text-danger">
+                                                        <strong id="error-period-from-date"></strong>
+                                                    </span>
                                                 </div>
                                                 <div class="col-4">
                                                     <input class="form-control"
                                                            type="time"
                                                            name="period_from_time"
                                                            id="campaign-start-time-add">
+                                                    <span class="text-danger">
+                                                        <strong id="error-period-from-time"></strong>
+                                                    </span>
                                                 </div>
-                                                <span class="text-danger">
-                                                     <strong id="error-period-from"></strong>
-                                                </span>
+
                                             </div>
                                             <div class="form-group row">
                                                 <label for="example-text-input"
@@ -165,12 +169,18 @@
                                                            type="date"
                                                            name="period_to_date"
                                                            id="campaign-end-day-add">
+                                                    <span class="text-danger">
+                                                        <strong id="error-period-to-date"></strong>
+                                                    </span>
                                                 </div>
                                                 <div class="col-4">
                                                     <input class="form-control"
                                                            type="time"
                                                            name="period_to_time"
                                                            id="campaign-end-time-add">
+                                                    <span class="text-danger">
+                                                        <strong id="error-period-to-time"></strong>
+                                                    </span>
                                                 </div>
                                                 <span class="text-danger">
                                                         <strong id="error-period-to"></strong>

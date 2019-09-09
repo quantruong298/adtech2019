@@ -96,6 +96,7 @@ class CampaignController extends Controller
         $objectives = Objective::all();
         $budgetTypes= BudgetType::all();
         $biddingMethods = BiddingMethod::all();
+
         return view('Component.MP.Campaign.edit',compact('campaign','medias','advertisers','objectives','budgetTypes','biddingMethods'));
     }
 

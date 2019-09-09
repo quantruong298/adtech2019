@@ -33,6 +33,9 @@
                                                            name="name"
                                                            value="{{$campaign->name}}"
                                                            id="campaign-name-add">
+                                                    <span class="text-danger">
+                                                        <strong id="error-name"></strong>
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -48,6 +51,9 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
+                                                    <span class="text-danger">
+                                                        <strong id="error-media"></strong>
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -63,6 +69,9 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
+                                                    <span class="text-danger">
+                                                        <strong id="error-advertiser"></strong>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -92,6 +101,9 @@
                                                            name="kpi"
                                                            value="{{$campaign->campaignDetail->kpi}}"
                                                            id="campaign-kpi-add">
+                                                    <span class="text-danger">
+                                                        <strong id="error-kpi"></strong>
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -107,6 +119,9 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
+                                                    <span class="text-danger">
+                                                        <strong id="error-objective"></strong>
+                                                    </span>
                                                 </div>
                                             </div>
 
@@ -129,6 +144,7 @@
                                     <div class="panel-body">
                                         <div class="panel-body-content">
                                             <div class="form-group row">
+                                                @php($pf = explode(' ',$campaign->campaignDetail->period_from))
                                                 <label for="example-text-input"
                                                        class="col-2 col-form-label">Period from</label>
                                                 <div class="col-4">
@@ -136,17 +152,24 @@
                                                            type="date"
                                                            name="period_from_date"
                                                            id="campaign-start-day-add"
-                                                           value="2019-06-05">
+                                                           value={{$pf[0]}}>
+                                                    <span class="text-danger">
+                                                        <strong id="error-period-from-date"></strong>
+                                                    </span>
                                                 </div>
                                                 <div class="col-4">
                                                     <input class="form-control"
                                                            type="time"
                                                            name="period_from_time"
                                                            id="campaign-start-time-add"
-                                                           value="13:45:00">
+                                                           value={{$pf[1]}}>
+                                                    <span class="text-danger">
+                                                        <strong id="error-period-from-time"></strong>
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
+                                                @php($pt = explode(' ',$campaign->campaignDetail->period_to))
                                                 <label for="example-text-input"
                                                        class="col-2 col-form-label">Period to</label>
                                                 <div class="col-4">
@@ -154,14 +177,20 @@
                                                            type="date"
                                                            name="period_to_date"
                                                            id="campaign-end-day-add"
-                                                           value="2019-06-17">
+                                                           value={{$pt[0]}}>
+                                                    <span class="text-danger">
+                                                        <strong id="error-period-to-date"></strong>
+                                                    </span>
                                                 </div>
                                                 <div class="col-4">
                                                     <input class="form-control"
                                                            type="time"
                                                            name="period_to_time"
                                                            id="campaign-end-time-add"
-                                                           value="13:45:00">
+                                                           value={{$pt[1]}}>
+                                                    <span class="text-danger">
+                                                        <strong id="error-period-to-time"></strong>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -195,6 +224,9 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
+                                                    <span class="text-danger">
+                                                        <strong id="error-budget-type"></strong>
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -210,6 +242,9 @@
                                                                name="campaign_period_budget"
                                                                value="{{$campaign->campaignDetail->campaign_period_budget}}"
                                                                id="campaign-period-budget-add">
+                                                        <span class="text-danger">
+                                                           <strong id="error-period-budget"></strong>
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -226,6 +261,9 @@
                                                                name="std_daily_budget"
                                                                value="{{$campaign->campaignDetail->std_daily_budget}}"
                                                                id="campaign-daily-budget-add">
+                                                        <span class="text-danger">
+                                                           <strong id="error-daily-budget"></strong>
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -260,6 +298,9 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
+                                                    <span class="text-danger">
+                                                           <strong id="error-bidding-method"></strong>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>

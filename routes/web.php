@@ -99,3 +99,16 @@ Route::resource('mp/plans', 'MP\PlanController');
 Route::get('mp/plans/camp/{id}', 'MP\PlanController@getCampaign');
 
 Route::get('/mp/ads/detail/{id}','MP\AdController@detail')->name('ads.detail');
+Route::get('test', function ()
+{
+    $client = new GuzzleHttp\Client();
+    $url = "http://ad-tech-dac.herokuapp.com/api/social_accounts/campaigns/cost";
+    $res = $client->request('POST', $url,[
+        'form_params' => [
+            "campaignNames"=>[
+                "Prof. Kelvin Zieme I","Ayana Abernathy","Emmy Leuschke"
+            ]
+        ],
+    ]);
+    return \GuzzleHttp\json_encode($res->getBody()->getContents());
+});

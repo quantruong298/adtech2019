@@ -25,7 +25,7 @@ class AdvertiserAccountController extends Controller
     {
         $email = $request->input('advertiserEmails');
         $campaigns = [];
-        for ($i = 0; $i < count($email); $i = $i + 1)
+        for ($i = 0; $i < count($email); $i++)
         {
             $campaigns[$i] = DB::table('campaigns')
                 ->join('media', 'campaigns.media_id', '=', 'media.id')
@@ -34,7 +34,9 @@ class AdvertiserAccountController extends Controller
                 ->join('objectives', 'campaigns_detail.objective_id', '=', 'objectives.id')
                 ->join('std_bidding_methods', 'campaigns_detail.std_bidding_method_id', '=', 'std_bidding_methods.id')
                 ->join('campaign_budget_types', 'campaigns_detail.budget_type_id', '=', 'campaign_budget_types.id')
-                ->select('campaigns.id', 'campaigns.name', 'media.name as media_name', 'flags.flag_name as flag_name', 'campaigns_detail.kpi as kpi', 'objectives.name as object_name', 'campaign_budget_types.name as budget_type', 'campaigns_detail.campaign_period_budget', 'campaigns_detail.std_daily_budget', 'std_bidding_methods.name as bidding_name', 'campaigns_detail.period_from', 'campaigns_detail.period_to')
+                ->join('campaign_statuses', 'campaigns_detail.id', '=', 'campaign_statuses.id')
+                ->join('delivery_statuses','campaign_statuses.delivery_status_id', '=', 'delivery_statuses.id' )
+                ->select('campaigns.id', 'campaigns.name', 'campaigns_detail.status', 'media.name as media_name', 'flags.flag_name as flag_name', 'campaigns_detail.kpi as kpi', 'objectives.name as object_name', 'campaign_budget_types.name as budget_type', 'campaigns_detail.campaign_period_budget', 'campaigns_detail.std_daily_budget', 'std_bidding_methods.name as bidding_name', 'campaigns_detail.period_from', 'campaigns_detail.period_to', 'delivery_statuses.name as delivery_status_name')
                 ->where('advertiser_email', $email[$i])->get();
         }
         return response()->json($campaigns);
@@ -57,7 +59,7 @@ class AdvertiserAccountController extends Controller
                 ->join('ad_groups_detail', 'ad_groups.id', '=', 'ad_groups_detail.id')
                 ->join('flags', 'ad_groups.flag_id', '=', 'flags.id')
                 ->join('std_bidding_methods', 'ad_groups_detail.std_bidding_method_id', '=', 'std_bidding_methods.id')
-                ->select('ad_groups.id', 'ad_groups.name', 'campaigns.name as campaign_name', 'flags.flag_name as flag_name', 'ad_groups_detail.period_from', 'ad_groups_detail.period_to', 'ad_groups_detail.ag_period_budget', 'ad_groups_detail.ag_period_budget_from', 'ad_groups_detail.ag_period_budget_to', 'ad_groups_detail.std_daily_budget', 'std_bidding_methods.name as std_bidding_method_name', 'ad_groups_detail.std_bidding_amount' )
+                ->select('ad_groups.id', 'ad_groups.name', 'ad_groups_detail.status', 'campaigns.name as campaign_name', 'flags.flag_name as flag_name', 'ad_groups_detail.period_from', 'ad_groups_detail.period_to', 'ad_groups_detail.ag_period_budget', 'ad_groups_detail.ag_period_budget_from', 'ad_groups_detail.ag_period_budget_to', 'ad_groups_detail.std_daily_budget', 'std_bidding_methods.name as std_bidding_method_name', 'ad_groups_detail.std_bidding_amount' )
                 ->where('advertiser_email', $email[$i])
                 ->where('campaign_id', $id)
                 ->get();
@@ -78,7 +80,7 @@ class AdvertiserAccountController extends Controller
                 ->join('ads_detail','ads.id', '=', 'ads_detail.id')
                 ->join('std_bidding_methods', 'ads_detail.std_bidding_method_id', '=', 'std_bidding_methods.id')
                 ->join('creative_types', 'ads_detail.creative_type_id', '=', 'creative_types.id')
-                ->select('ads.id', 'ads.name', 'campaigns.name as campaign_name', 'ad_groups.name as ad_group_name', 'flags.flag_name', 'ads_detail.creative_preview', 'creative_types.name as create_type_name', 'ads_detail.spent', 'ads_detail.click_through_rate', 'ads_detail.cost_per_click', 'ads_detail.period_from', 'ads_detail.period_to', 'ads_detail.ads_period_budget', 'ads_detail.ads_period_budget_from', 'ads_detail.ads_period_budget_to', 'ads_detail.std_daily_budget', 'std_bidding_methods.name')
+                ->select('ads.id', 'ads.name', 'ads_detail.status', 'campaigns.name as campaign_name', 'ad_groups.name as ad_group_name', 'flags.flag_name', 'ads_detail.creative_preview', 'creative_types.name as create_type_name', 'ads_detail.spent', 'ads_detail.click_through_rate', 'ads_detail.cost_bidding', 'ads_detail.period_from', 'ads_detail.period_to', 'ads_detail.ads_period_budget', 'ads_detail.ads_period_budget_from', 'ads_detail.ads_period_budget_to', 'ads_detail.std_daily_budget', 'std_bidding_methods.name')
                 ->where('advertiser_email', $email[$i])
                 ->where('ads.campaign_id', $id)
                 ->where('ads.ad_group_id', $param)
