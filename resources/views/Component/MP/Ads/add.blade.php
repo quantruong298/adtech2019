@@ -56,7 +56,7 @@
                                         <div class="col-4">
                                             <select class="form-control"
                                                     name="ad_group_id"
-                                                    id="ad-adgroup-id-add">
+                                                    id="ad-adgroup-id-add" onchange="getAdGroupDetail(this)">
                                                 <option disabled selected>Choose AdGroup</option>
                                                 @foreach($adgroups as $adgroup)
                                                     <option value="{{$adgroup->id}}">{{$adgroup->name}}</option>
@@ -66,6 +66,9 @@
                                                   <strong id="error-adgroup"></strong>
                                             </span>
                                         </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div id="adgroupDetail"></div>
                                     </div>
                                 </div>
                             </div>

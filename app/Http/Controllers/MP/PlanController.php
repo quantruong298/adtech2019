@@ -26,6 +26,7 @@ class PlanController extends Controller
         $campaign = Campaign::find($id);
         return view('Component.MP.Plan.campaignDetail',compact('campaign'));
     }
+
     /**
      * Show the form for creating a new resource.
      *

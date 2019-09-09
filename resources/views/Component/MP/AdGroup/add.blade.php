@@ -43,7 +43,7 @@
                                         <div class="col-4">
                                             <select class="form-control"
                                                     name="campaign_id"
-                                                    id="adgroup-media-add">
+                                                    id="adgroup-media-add" onchange="getCampaignDetail(this)">
                                                 <option disabled selected>Choose campaign</option>
                                                 @foreach($campaigns as $campaign)
                                                     <option value="{{$campaign->id}}">{{$campaign->name}}</option>
@@ -53,6 +53,9 @@
                                                   <strong id="error-campaign"></strong>
                                             </span>
                                         </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div id="campaignDetail"></div>
                                     </div>
                                 </div>
                             </div>

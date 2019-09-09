@@ -33,6 +33,10 @@ class AdController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function getAdGroup($id){
+        $adgroup = AdGroup::find($id);
+        return view('Component.MP.Ads.adgroupDetail',compact('adgroup'));
+    }
     public function create()
     {
         $adgroups = AdGroup::all();

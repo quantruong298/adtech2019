@@ -69,7 +69,7 @@
                         </span>
                         <select class="col-9 form-control"
                                 name="campaign_id" id="selectCampaign" onchange="getCampaignDetail(this)">
-                            <option disabled selected></option>
+                            <option disabled selected>Choose campaign</option>
                             @foreach($campaigns as $campaign)
                                 <option value="{{$campaign->id}}">
                                     {{$campaign->name}}

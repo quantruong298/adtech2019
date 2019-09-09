@@ -377,6 +377,18 @@ function getCampaignDetail(e) {
             alert('No response from server');
     });
 }
+function getAdGroupDetail(e) {
+    $.ajax(
+        {
+            url: 'ads/ag/'+e.value,
+            type: "get",
+            datatype: "html",
+        }).done(function (data) {
+        $("#adgroupDetail").html(data);
+    }).fail(function (jqXHR, ajaxOptions, thrownError) {
+        alert('No response from server');
+    });
+}
 function getAdGroupsByCampaignId(id){
     $.ajax(
         {

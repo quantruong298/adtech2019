@@ -94,6 +94,8 @@ Route::get('/mp/a/{id}','MP\GeneralController@getAdsByAdGroupId')->middleware('a
 Route::resource('mp/campaigns', 'MP\CampaignController')->except(['destroy']);
 Route::resource('mp/adgroups', 'MP\AdGroupController')->except(['destroy']);
 Route::resource('mp/ads', 'MP\AdController')->except(['destroy']);
+Route::get('mp/ads/ag/{id}', 'MP\AdController@getAdGroup');
 Route::resource('mp/plans', 'MP\PlanController');
 Route::get('mp/plans/camp/{id}', 'MP\PlanController@getCampaign');
+
 Route::get('/mp/ads/detail/{id}','MP\AdController@detail')->name('ads.detail');
