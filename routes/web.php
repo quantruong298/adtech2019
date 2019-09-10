@@ -99,5 +99,3 @@ Route::resource('mp/plans', 'MP\PlanController');
 Route::get('mp/plans/camp/{id}', 'MP\PlanController@getCampaign');
 
 Route::get('/mp/ads/detail/{id}','MP\AdController@detail')->name('ads.detail');
-
-Route::apiResource('dsp', 'api\DSPController')->except(['create','store','show','destroy','edit','update']);

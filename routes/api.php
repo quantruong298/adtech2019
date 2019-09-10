@@ -25,6 +25,9 @@ Route::get('ad-groups','api\AdvertiserAccountController@showAdgroups');
 Route::post('campaigns/{id}/ad-groups', 'api\AdvertiserAccountController@adgroups');
 Route::post('campaigns/{id?}/ad-groups/{param?}/ads', 'api\AdvertiserAccountController@ads');
 
+Route::post('bidding', 'api\DSPController@bidding');
+Route::post('result', 'api\DSPController@resutl');
+
 Route::post('auth/register', 'api\UserController@register');
 Route::post('auth/login', 'api\SocialAccountController@login');
 Route::group(['middleware' => 'jwt.auth'], function () {Route::get('user-info', 'api\UserController@getUserInfo');
