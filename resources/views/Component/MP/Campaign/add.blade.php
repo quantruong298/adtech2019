@@ -159,7 +159,6 @@
                                                         <strong id="error-period-from-time"></strong>
                                                     </span>
                                                 </div>
-
                                             </div>
                                             <div class="form-group row">
                                                 <label for="example-text-input"

@@ -31,7 +31,7 @@
                                             <input class="form-control"
                                                    type="text"
                                                    name="name"
-                                                   id="adgroup-name-add">
+                                                   id="ag-name-add">
                                             <span class="text-danger">
                                                   <strong id="error-name"></strong>
                                             </span>
@@ -43,7 +43,7 @@
                                         <div class="col-4">
                                             <select class="form-control"
                                                     name="campaign_id"
-                                                    id="adgroup-media-add" onchange="getCampaignDetail(this)">
+                                                    id="ag-media-add" onchange="getCampaignDetail(this)">
                                                 <option disabled selected>Choose campaign</option>
                                                 @foreach($campaigns as $campaign)
                                                     <option value="{{$campaign->id}}">{{$campaign->name}}</option>
@@ -82,17 +82,20 @@
                                             <input class="form-control"
                                                    type="date"
                                                    name="period_from_date"
-                                                   id="adgroup-start-day-add">
+                                                   id="ag-start-day-add">
+                                            <span class="text-danger">
+                                                <strong id="error-period-from-date"></strong>
+                                            </span>
                                         </div>
                                         <div class="col-4">
                                             <input class="form-control"
                                                    type="time"
                                                    name="period_from_time"
-                                                   id="adgroup-start-time-add">
+                                                   id="ag-start-time-add">
+                                            <span class="text-danger">
+                                                <strong id="error-period-from-time"></strong>
+                                            </span>
                                         </div>
-                                        <span class="text-danger">
-                                            <strong id="error-period-from"></strong>
-                                        </span>
                                     </div>
                                     <div class="form-group row">
                                         <label for="example-text-input"
@@ -101,13 +104,19 @@
                                             <input class="form-control"
                                                    type="date"
                                                    name="period_to_date"
-                                                   id="adgroup-end-day-add">
+                                                   id="ag-end-day-add">
+                                            <span class="text-danger">
+                                                <strong id="error-period-to-date"></strong>
+                                            </span>
                                         </div>
                                         <div class="col-4">
                                             <input class="form-control"
                                                    type="time"
                                                    name="period_to_time"
-                                                   id="adgroup-end-time-add">
+                                                   id="ag-end-time-add">
+                                            <span class="text-danger">
+                                                <strong id="error-period-to-time"></strong>
+                                            </span>
                                         </div>
                                         <span class="text-danger">
                                             <strong id="error-period-to"></strong>
@@ -141,8 +150,8 @@
                                                 </div>
                                                 <input type="number" class="form-control"
                                                        aria-describedby="basic-addon1"
-                                                       name="adgroup_period_budget"
-                                                       id="adgroup-period-budget-add">
+                                                       name="ag_period_budget"
+                                                       id="ag-period-budget-add">
                                                 <span class="text-danger">
                                                     <strong id="error-period-budget"></strong>
                                                 </span>
@@ -159,8 +168,8 @@
                                                 </div>
                                                 <input type="number" class="form-control"
                                                        aria-describedby="basic-addon1"
-                                                       name="adgroup_period_budget_from"
-                                                       id="adgroup-period-budget-add">
+                                                       name="ag_period_budget_from"
+                                                       id="ag-period-budget-add">
                                                 <span class="text-danger">
                                                     <strong id="error-period-budget-from"></strong>
                                                 </span>
@@ -177,8 +186,8 @@
                                                 </div>
                                                 <input type="number" class="form-control"
                                                        aria-describedby="basic-addon1"
-                                                       name="adgroup_period_budget_to"
-                                                       id="adgroup-period-budget-add">
+                                                       name="ag_period_budget_to"
+                                                       id="ag-period-budget-add">
                                                 <span class="text-danger">
                                                     <strong id="error-period-budget-to"></strong>
                                                 </span>
@@ -196,7 +205,7 @@
                                                 <input type="number" class="form-control"
                                                        aria-describedby="basic-addon1"
                                                        name="std_daily_budget"
-                                                       id="adgroup-daily-budget-add">
+                                                       id="ag-daily-budget-add">
                                                 <span class="text-danger">
                                                     <strong id="error-daily-budget"></strong>
                                                 </span>

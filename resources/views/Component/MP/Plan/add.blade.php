@@ -6,47 +6,68 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body mx-3">
                 <form id="formAddPlan" method="post" action="{{route('plans.store')}}">
                     @csrf
                     <div class="form-group row">
-                        <label class="col-3 align-middle m-auto">Area Name</label>
-                        <input type="text"
-                               class="form-control col-9 form-control-user"
-                               required name="area_name">
-                        <span class="text-danger">
-                            <strong id="error-area-name"></strong>
-                        </span>
+                        <label for="example-text-input"
+                               class="col-2 col-form-label">Area Name</label>
+                        <div class="col-8">
+                            <input class="form-control"
+                                   type="text"
+                                   name="area_name"
+                                   id="campaign-name-add">
+                            <span class="text-danger">
+                                <strong id="error-area-name"></strong>
+                            </span>
+                        </div>
                     </div>
                     <div class="form-group row">
                         <label for="example-text-input"
-                               class="col-3 col-form-label">Period from</label>
-                            <input class="form-control col-4 form-control-user"
+                               class="col-2 col-form-label">Period from</label>
+                        <div class="col-4">
+                            <input class="form-control"
                                    type="date"
                                    name="period_from_date"
                                    id="campaign-start-day-add">
-                            <input class="form-control col-4 form-control-user"
+                            <span class="text-danger">
+                                <strong id="error-period-from-date"></strong>
+                            </span>
+                        </div>
+                        <div class="col-4">
+                            <input class="form-control"
                                    type="time"
                                    name="period_from_time"
                                    id="campaign-start-time-add">
                             <span class="text-danger">
-                                <strong id="error-period-from"></strong>
+                                <strong id="error-period-from-time"></strong>
                             </span>
+                        </div>
                     </div>
                     <div class="form-group row">
                         <label for="example-text-input"
-                               class="col-3 col-form-label">Period to</label>
-                        <input class="form-control col-4 form-control-user"
-                               type="date"
-                               name="period_to_date"
-                               id="campaign-start-day-add">
-                        <input class="form-control col-4 form-control-user"
-                               type="time"
-                               name="period_to_time"
-                               id="campaign-start-time-add">
-                        <span class="text-danger">
-                                <strong id="error-period-to"></strong>
+                               class="col-2 col-form-label">Period to</label>
+                        <div class="col-4">
+                            <input class="form-control"
+                                   type="date"
+                                   name="period_to_date"
+                                   id="campaign-end-day-add">
+                            <span class="text-danger">
+                                <strong id="error-period-to-date"></strong>
                             </span>
+                        </div>
+                        <div class="col-4">
+                            <input class="form-control"
+                                   type="time"
+                                   name="period_to_time"
+                                   id="campaign-end-time-add">
+                            <span class="text-danger">
+                                <strong id="error-period-to-time"></strong>
+                            </span>
+                        </div>
+                        <span class="text-danger">
+                            <strong id="error-period-to"></strong>
+                        </span>
                     </div>
 {{--                    <div class="form-group row">--}}
 {{--                        <label for="example-text-input"--}}
@@ -63,22 +84,22 @@
 {{--                            </div>--}}
 {{--                        </div>--}}
 {{--                    </div>--}}
-                    <div class="row form-group">
-                        <span class="col-3 align-middle m-auto">
-                            Choose Campaign
-                        </span>
-                        <select class="col-9 form-control"
-                                name="campaign_id" id="selectCampaign" onchange="getCampaignDetail(this)">
-                            <option disabled selected>Choose campaign</option>
-                            @foreach($campaigns as $campaign)
-                                <option value="{{$campaign->id}}">
-                                    {{$campaign->name}}
-                                </option>
-                            @endforeach
-                        </select>
-                        <span class="text-danger">
-                            <strong id="error-campaign"></strong>
-                        </span>
+                    <div class="form-group row">
+                        <label for="example-text-input"
+                               class="col-2 col-form-label">Campaign</label>
+                        <div class="col-4">
+                            <select class="form-control"
+                                    name="campaign_id"
+                                    id="ag-media-add" onchange="getCampaignDetail(this)">
+                                <option disabled selected>Choose campaign</option>
+                                @foreach($campaigns as $campaign)
+                                    <option value="{{$campaign->id}}">{{$campaign->name}}</option>
+                                @endforeach
+                            </select>
+                            <span class="text-danger">
+                                <strong id="error-campaign"></strong>
+                            </span>
+                        </div>
                     </div>
 {{--                    <div class="form-group">--}}
 {{--                        <ul class="list-ads">--}}

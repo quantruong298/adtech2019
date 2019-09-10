@@ -87,20 +87,6 @@
                                 <div class="panel-body-content">
                                     <div class="form-group row">
                                         <label for="example-text-input"
-                                               class="col-2 col-form-label">Creative Preview</label>
-                                        <div class="col-8">
-                                            <input class="form-control"
-                                                   type="text"
-                                                   name="creative_preview"
-                                                   value="{{$ad->adDetail->creative_preview}}"
-                                                   id="ad-creative-preview-add">
-                                            <span class="text-danger">
-                                                  <strong id="error-creative-preview"></strong>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="example-text-input"
                                                class="col-2 col-form-label">Creative Type</label>
                                         <div class="col-4">
                                             <select class="form-control"
@@ -112,6 +98,40 @@
                                             </select>
                                             <span class="text-danger">
                                                   <strong id="error-creative-type"></strong>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="creative-preview-add"
+                                               class="col-2 col-form-label">Creative Preview</label>
+                                        <div class="col-8">
+                                            <input class="form-control"
+                                                   type="file"
+                                                   name="creative_preview"
+                                                   id="creative-preview-add" onchange="readURL(this);">
+                                            <span class="text-danger">
+                                                  <strong id="error-creative-preview"></strong>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="example-text-input"
+                                               class="col-2 col-form-label"></label>
+                                        <div class="col-4" id="preview-image-wrap">
+                                            <img id="preview-image" src="{{$ad->adDetail->creative_preview}}" alt="preview image"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="example-text-input"
+                                               class="col-2 col-form-label">URL</label>
+                                        <div class="col-8">
+                                            <input class="form-control"
+                                                   type="text"
+                                                   name="url"
+                                                   id="ad-creative-preview-add"
+                                                   value={{$ad->adDetail->url}}>
+                                            <span class="text-danger">
+                                                  <strong id="error-url"></strong>
                                             </span>
                                         </div>
                                     </div>

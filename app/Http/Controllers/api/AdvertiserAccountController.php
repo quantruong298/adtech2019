@@ -48,11 +48,12 @@ class AdvertiserAccountController extends Controller
         //dd($adgroups );
         return response()->json($adgroups);
     }
+
     public function adgroups($id, Request $request)
     {
         $email = $request->input('advertiserEmails');
         $adgroups = [];
-        for ($i = 0; $i < count($email); $i = $i + 1)
+        for ($i = 0; $i < count($email); $i++)
         {
             $adgroups[$i] = DB::table('ad_groups')
                 ->join('campaigns', 'ad_groups.campaign_id', '=', 'campaigns.id')
@@ -71,7 +72,7 @@ class AdvertiserAccountController extends Controller
     {
         $email = $request->input('advertiserEmails');
         $ads = [];
-        for ($i = 0; $i < count($email); $i = $i + 1)
+        for ($i = 0; $i < count($email); $i++)
         {
             $ads[$i] = DB::table('ads')
                 ->join('campaigns', 'ads.campaign_id', '=', 'campaigns.id')

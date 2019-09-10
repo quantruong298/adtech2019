@@ -14,6 +14,8 @@ use App\Models\AdGroupDetail;
 use App\Models\Campaign;
 use App\Models\CreativeType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use JD\Cloudder\Facades\Cloudder;
 
 class AdController extends Controller
 {
@@ -59,8 +61,9 @@ class AdController extends Controller
         $ad->flag_id = 1;
         $ad->save();
         $adDetail = new AdDetail();
-        $adDetail->creative_preview = $request->creative_preview;
         $adDetail->creative_type_id = $request->creative_type_id;
+        $adDetail->creative_preview = $this->uploadFile($request->file('creative_preview'));
+        $adDetail->url = $request->url;
         $adDetail->spent = 111;
         $adDetail->click_through_rate = 111;
         $adDetail->cost_bidding = $request->cost_bidding;
@@ -117,8 +120,9 @@ class AdController extends Controller
         $ad->flag_id = 1;
         $ad->save();
         $adDetail = AdDetail::find($id);
-        $adDetail->creative_preview = $request->creative_preview;
         $adDetail->creative_type_id = $request->creative_type_id;
+        $adDetail->creative_preview = $request->creative_preview;
+        $adDetail->url = $request->url;
         $adDetail->spent = 111;
         $adDetail->click_through_rate = 111;
         $adDetail->cost_bidding = $request->cost_bidding;
@@ -143,5 +147,9 @@ class AdController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function uploadFile($file){
+        Cloudder::upload($file);
+        return "http://res.cloudinary.com/hfmikccfm/image/upload/".Cloudder::getPublicId().".jpg";
     }
 }

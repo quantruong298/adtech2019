@@ -157,10 +157,10 @@ function updateAdGroup() {
             $('#error-name').empty().html(errors.name);
             $('#error-campaign').empty().html(errors.campaign_id);
             $('#error-media').empty().html(errors.media_id);
-            $('#error-period-from').empty().html(errors.period_from_date);
-            $('#error-period-from').empty().html(errors.period_from_time);
-            $('#error-period-to').empty().html(errors.period_to_date);
-            $('#error-period-to').empty().html(errors.period_to_time);
+            $('#error-period-from-date').empty().html(errors.period_from_date);
+            $('#error-period-from-time').empty().html(errors.period_from_time);
+            $('#error-period-to-date').empty().html(errors.period_to_date);
+            $('#error-period-to-time').empty().html(errors.period_to_time);
             $('#error-period-budget').empty().html(errors.ag_period_budget);
             $('#error-period-budget-from').empty().html(errors.ag_period_budget_from);
             $('#error-period-budget-to').empty().html(errors.ag_period_budget_to);
@@ -172,9 +172,13 @@ function updateAdGroup() {
 function updateAd() {
     var form = $("#formUpdateAd");
     var url = form.attr('action');
+    var formData = new FormData(form[0]);
     $.ajax({
         url: url,
-        data: form.serialize(),
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false,
         type: "put",
         success: function (data) {
             Swal.fire({
@@ -189,13 +193,14 @@ function updateAd() {
             console.log(errors);
             $('#error-name').empty().html(errors.name);
             $('#error-adgroup').empty().html(errors.ad_group_id);
-            $('#error-creative-preview').empty().html(errors.creative_preview);
             $('#error-creative-type').empty().html(errors.creative_type_id);
+            $('#error-creative-preview').empty().html(errors.creative_preview);
+            $('#error-url').empty().html(errors.url);
             $('#error-cost-bidding').empty().html(errors.cost_bidding);
-            $('#error-period-from').empty().html(errors.period_from_date);
-            $('#error-period-from').empty().html(errors.period_from_time);
-            $('#error-period-to').empty().html(errors.period_to_date);
-            $('#error-period-to').empty().html(errors.period_to_time);
+            $('#error-period-from-date').empty().html(errors.period_from_date);
+            $('#error-period-from-time').empty().html(errors.period_from_time);
+            $('#error-period-to-date').empty().html(errors.period_to_date);
+            $('#error-period-to-time').empty().html(errors.period_to_time);
             $('#error-period-budget').empty().html(errors.ads_period_budget);
             $('#error-period-budget-from').empty().html(errors.ads_period_budget_from);
             $('#error-period-budget-to').empty().html(errors.ads_period_budget_to);
@@ -225,10 +230,10 @@ function updatePlan() {
             console.log(errors);
             $('#error-area-name').empty().html(errors.area_name);
             $('#error-campaign').empty().html(errors.campaign_id);
-            $('#error-period-from').empty().html(errors.period_from_date);
-            $('#error-period-from').empty().html(errors.period_from_time);
-            $('#error-period-to').empty().html(errors.period_to_date);
-            $('#error-period-to').empty().html(errors.period_to_time);
+            $('#error-period-from-date').empty().html(errors.period_from_date);
+            $('#error-period-from-time').empty().html(errors.period_from_time);
+            $('#error-period-to-date').empty().html(errors.period_to_date);
+            $('#error-period-to-time').empty().html(errors.period_to_time);
         }
     })
 }
@@ -288,10 +293,10 @@ function storeAdGroup() {
             $('#error-name').empty().html(errors.name);
             $('#error-campaign').empty().html(errors.campaign_id);
             $('#error-media').empty().html(errors.media_id);
-            $('#error-period-from').empty().html(errors.period_from_date);
-            $('#error-period-from').empty().html(errors.period_from_time);
-            $('#error-period-to').empty().html(errors.period_to_date);
-            $('#error-period-to').empty().html(errors.period_to_time);
+            $('#error-period-from-date').empty().html(errors.period_from_date);
+            $('#error-period-from-time').empty().html(errors.period_from_time);
+            $('#error-period-to-date').empty().html(errors.period_to_date);
+            $('#error-period-to-time').empty().html(errors.period_to_time);
             $('#error-period-budget').empty().html(errors.ag_period_budget);
             $('#error-period-budget-from').empty().html(errors.ag_period_budget_from);
             $('#error-period-budget-to').empty().html(errors.ag_period_budget_to);
@@ -302,10 +307,14 @@ function storeAdGroup() {
 }
 function storeAd() {
     var form = $("#formAddAd");
+    var formData = new FormData(form[0]);
     var url = form.attr('action');
     $.ajax({
         url: url,
-        data: form.serialize(),
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false,
         type: "post",
         success: function (data) {
             console.log(data);
@@ -321,13 +330,14 @@ function storeAd() {
             console.log(errors);
             $('#error-name').empty().html(errors.name);
             $('#error-adgroup').empty().html(errors.ad_group_id);
-            $('#error-creative-preview').empty().html(errors.creative_preview);
             $('#error-creative-type').empty().html(errors.creative_type_id);
+            $('#error-creative-preview').empty().html(errors.creative_preview);
+            $('#error-url').empty().html(errors.url);
             $('#error-cost-bidding').empty().html(errors.cost_bidding);
-            $('#error-period-from').empty().html(errors.period_from_date);
-            $('#error-period-from').empty().html(errors.period_from_time);
-            $('#error-period-to').empty().html(errors.period_to_date);
-            $('#error-period-to').empty().html(errors.period_to_time);
+            $('#error-period-from-date').empty().html(errors.period_from_date);
+            $('#error-period-from-time').empty().html(errors.period_from_time);
+            $('#error-period-to-date').empty().html(errors.period_to_date);
+            $('#error-period-to-time').empty().html(errors.period_to_time);
             $('#error-period-budget').empty().html(errors.ads_period_budget);
             $('#error-period-budget-from').empty().html(errors.ads_period_budget_from);
             $('#error-period-budget-to').empty().html(errors.ads_period_budget_to);
@@ -357,10 +367,10 @@ function storePlan() {
             console.log(errors);
             $('#error-area-name').empty().html(errors.area_name);
             $('#error-campaign').empty().html(errors.campaign_id);
-            $('#error-period-from').empty().html(errors.period_from_date);
-            $('#error-period-from').empty().html(errors.period_from_time);
-            $('#error-period-to').empty().html(errors.period_to_date);
-            $('#error-period-to').empty().html(errors.period_to_time);
+            $('#error-period-from-date').empty().html(errors.period_from_date);
+            $('#error-period-from-time').empty().html(errors.period_from_time);
+            $('#error-period-to-date').empty().html(errors.period_to_date);
+            $('#error-period-to-time').empty().html(errors.period_to_time);
         }
     })
 }
@@ -412,4 +422,15 @@ function getAdsByAdGroupId(id){
     }).fail(function (jqXHR, ajaxOptions, thrownError) {
         alert('No response from server');
     });
+}
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#preview-image-wrap').removeAttr('hidden');
+            $('#preview-image').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
 }

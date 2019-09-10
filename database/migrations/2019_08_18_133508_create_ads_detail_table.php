@@ -16,8 +16,9 @@ class CreateAdsDetailTable extends Migration
         Schema::create('ads_detail', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->boolean('status')->nullable();
-            $table->string('creative_preview');
             $table->tinyInteger('creative_type_id');
+            $table->string('creative_preview');
+            $table->string('url');
             $table->integer('spent')->nullable();
             $table->integer('click_through_rate')->nullable();;
             $table->integer('cost_bidding')->nullable();;

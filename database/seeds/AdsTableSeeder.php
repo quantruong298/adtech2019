@@ -32,8 +32,9 @@ class AdsTableSeeder extends Seeder
             $status = $faker->boolean;
             $dataAdsDetailInsert[]=[
                 'status'=>$status,
-                'creative_preview'=>$faker->imageUrl($width = 640, $height = 480),
                 'creative_type_id'=>$faker->randomElement($creativeTypeIds),
+                'creative_preview'=>$faker->imageUrl($width = 640, $height = 480),
+                'url'=>$faker->url,
                 'spent'=>123,
                 'click_through_rate'=>123,
                 'cost_bidding'=>rand(5000,50000),

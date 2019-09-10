@@ -27,7 +27,7 @@ class UpdateCampaign extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'max:255','unique:campaigns'],
+            'name' => ['required', 'string', 'max:255'],
             'advertiser_email' => ['required', 'string', 'email', 'max:255'],
             'media_id' => ['required', 'integer'],
             'kpi' => ['required', 'integer'],

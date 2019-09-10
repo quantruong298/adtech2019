@@ -16,7 +16,7 @@ class Ad extends Model
     }
     public function adGroup()
     {
-        return $this->belongsTo('App\Models\adGroup','ad_group_id');
+        return $this->belongsTo('App\Models\AdGroup','ad_group_id');
     }
     public function campaign()
     {

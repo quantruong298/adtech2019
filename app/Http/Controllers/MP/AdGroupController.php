@@ -51,9 +51,9 @@ class AdGroupController extends Controller
         $adgroupDetail = new AdGroupDetail();
         $adgroupDetail->period_from = Datetime::handlerDateTime($request->period_from_date, $request->period_from_time);
         $adgroupDetail->period_to=Datetime::handlerDateTime($request->period_to_date, $request->period_to_time);
-        $adgroupDetail->ag_period_budget=$request->adgroup_period_budget;
-        $adgroupDetail->ag_period_budget_from=$request->adgroup_period_budget_from;
-        $adgroupDetail->ag_period_budget_to=$request->adgroup_period_budget_to;
+        $adgroupDetail->ag_period_budget=$request->ag_period_budget;
+        $adgroupDetail->ag_period_budget_from=$request->ag_period_budget_from;
+        $adgroupDetail->ag_period_budget_to=$request->ag_period_budget_to;
         $adgroupDetail->std_daily_budget=$request->std_daily_budget;
         $adgroupDetail->std_bidding_method_id = Campaign::find($request->campaign_id)->std_bidding_method_id;
         $adgroupDetail->std_bidding_amount = $request->std_bidding_amount;
@@ -81,8 +81,8 @@ class AdGroupController extends Controller
     public function edit($id)
     {
         $campaigns = Campaign::all();
-        $adgroup = AdGroup::find($id);
-        return view('Component.MP.AdGroup.edit',compact('campaigns','adgroup'));
+        $adGroup = AdGroup::find($id);
+        return view('Component.MP.AdGroup.edit',compact('campaigns','adGroup'));
     }
 
     /**
@@ -102,9 +102,9 @@ class AdGroupController extends Controller
         $adgroupDetail = AdGroupDetail::find($id);
         $adgroupDetail->period_from = Datetime::handlerDateTime($request->period_from_date, $request->period_from_time);
         $adgroupDetail->period_to=Datetime::handlerDateTime($request->period_to_date, $request->period_to_time);
-        $adgroupDetail->ag_period_budget=$request->adgroup_period_budget;
-        $adgroupDetail->ag_period_budget_from=$request->adgroup_period_budget_from;
-        $adgroupDetail->ag_period_budget_to=$request->adgroup_period_budget_to;
+        $adgroupDetail->ag_period_budget=$request->ag_period_budget;
+        $adgroupDetail->ag_period_budget_from=$request->ag_period_budget_from;
+        $adgroupDetail->ag_period_budget_to=$request->ag_period_budget_to;
         $adgroupDetail->std_daily_budget=$request->std_daily_budget;
         $adgroupDetail->std_bidding_method_id = Campaign::find($request->campaign_id)->std_bidding_method_id;
         $adgroupDetail->std_bidding_amount = $request->std_bidding_amount;
