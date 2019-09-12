@@ -25,10 +25,14 @@ class CampaignController extends Controller
      */
     public function index()
     {
-        $campaigns = Campaign::orderBy('id', 'desc')->paginate(Pagination::MEDIA_PLAN);
+        $campaigns = Campaign::where('flag_id','!=',3)->orderBy('id', 'desc')->orderBy('id', 'desc')->paginate(Pagination::MEDIA_PLAN);
         return view('Component.MP.dashboard',compact('campaigns'));
     }
-
+    public function deleted()
+    {
+        $campaigns = Campaign::where('flag_id',3)->orderBy('id', 'desc')->orderBy('id', 'desc')->paginate(Pagination::MEDIA_PLAN);
+        return view('Component.MP.dashboard',compact('campaigns'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -57,7 +61,6 @@ class CampaignController extends Controller
         $campaign->media_id=$request->media_id;
         $campaign->advertiser_email=$request->advertiser_email;
         $campaign->flag_id = 1;
-        $campaign->save();
         $campaignDetail = new CampaignDetail();
         $campaignDetail->kpi=$request->kpi;
         $campaignDetail->objective_id=$request->objective_id;
@@ -67,6 +70,7 @@ class CampaignController extends Controller
         $campaignDetail->campaign_period_budget=$request->campaign_period_budget;
         $campaignDetail->std_daily_budget=$request->std_daily_budget;
         $campaignDetail->std_bidding_method_id = $request->std_bidding_method_id;
+        $campaign->save();
         $campaign->campaignDetail()->save($campaignDetail);
         return $campaign;
     }
@@ -114,7 +118,6 @@ class CampaignController extends Controller
         $campaign->media_id=$request->media_id;
         $campaign->advertiser_email=$request->advertiser_email;
         $campaign->flag_id = 1;
-        $campaign->save();
         $campaignDetail = CampaignDetail::find($id);
         $campaignDetail->kpi=$request->kpi;
         $campaignDetail->objective_id=$request->objective_id;
@@ -125,10 +128,8 @@ class CampaignController extends Controller
         $campaignDetail->std_daily_budget=$request->std_daily_budget;
         $campaignDetail->std_bidding_method_id = $request->std_bidding_method_id;
         $campaign->campaignDetail()->save($campaignDetail);
-        return response()->json([
-            'data' => $campaign->name,
-        ], 200);
-        //        return $campaign->name;
+        $campaign->save();
+        return $campaign;
     }
 
     /**

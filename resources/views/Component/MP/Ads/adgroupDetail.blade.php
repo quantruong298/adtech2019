@@ -5,11 +5,11 @@
         </div>
         <div>
             <label class="col-4">Period From</label>
-            <input type="text" name="" value="{{$adgroup->adGroupDetail->period_from}}" disabled>
+            <input type="text" name="" value="{{date("m-d-Y H:i:s", strtotime($adgroup->adGroupDetail->period_from))}}" disabled>
         </div>
         <div>
             <label class="col-4">Period To</label>
-            <input type="text" name="" value="{{$adgroup->adGroupDetail->period_to}}" disabled>
+            <input type="text" name="" value="{{date("m-d-Y H:i:s", strtotime($adgroup->adGroupDetail->period_to))}}" disabled>
         </div>
         <div>
             <label class="col-4">Period Buget</label>

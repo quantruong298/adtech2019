@@ -6,6 +6,11 @@
                     <h2>Plan <b>Management</b></h2>
                 </div>
                 <div class=" p-0 m-0 ml-auto">
+                    @if(\Request::is('mp/plans'))
+                        <a class="mr-5" href="plans/deleted">Click to see deleted Plans</a>
+                    @else
+                        <a class="mr-5" href="{{route('plans.index')}}">&#8592Back</a>
+                    @endif
                     <button onclick="addPlan()" class="btn btn-primary" ><i class="fa fa-plus" aria-hidden="true"></i><span> New Plan</span></button>
                 </div>
             </div>
@@ -13,37 +18,38 @@
         <table class="table table-striped  table-hover">
             <thead>
             <tr>
-                <th>#</th>
-                <th>Media</th>
-                <th>Campaign's Name</th>
+                <th class="text-lg-center">#</th>
+                <th class="text-lg-center">Media</th>
+                <th class="text-lg-center">Campaign's Name</th>
 {{--                <th>AdGroup's Name</th>--}}
-                <th>Area Name</th>
-                <th>Period From</th>
-                <th>Period To</th>
-                <th>Flag</th>
+                <th class="text-lg-center">Area Name</th>
+                <th class="text-lg-center">Period From</th>
+                <th class="text-lg-center">Period To</th>
+                <th class="text-lg-center">Flag</th>
+                <th class="text-lg-center">Action</th>
             </tr>
             </thead>
                 <tbody>
                 @foreach($plans as $plan)
                     <tr id="rowUser{{$plan->id}}">
-                        <td class="align-middle">{{$plan->id }}</td>
-                        <td class="align-middle">{{$plan->media->name}}</td>
-                        <td class="align-middle">{{$plan->campaign->name }}</td>
+                        <td class="align-middle text-lg-center">{{$plan->id }}</td>
+                        <td class="align-middle text-lg-center">{{$plan->media->name}}</td>
+                        <td class="align-middle text-lg-center">{{$plan->campaign->name }}</td>
 {{--                        <td class="align-middle">{{$plan->adGroup->name }}</td>--}}
-                        <td class="align-middle">{{$plan->area_name }}</td>
-                        <td class="align-middle">{{$plan->period_from }}</td>
-                        <td class="align-middle">{{$plan->period_to}}</td>
-                        <td class="align-middle">
+                        <td class="align-middle text-lg-center">{{$plan->area_name }}</td>
+                        <td class="align-middle text-lg-center">{{$plan->period_from }}</td>
+                        <td class="align-middle text-lg-center">{{$plan->period_to}}</td>
+                        <td class="align-middle text-lg-center">
                             @if($plan->flag_id==1)
                                 <i class="material-icons" style="color:green">check</i>
                             @elseif($plan->flag_id==2)
-                                <i class="material-icons" style="color:orangered">delete</i>
+                                <i class="material-icons" style="color:orangered">block</i>
                             @else
-                                <i class="material-icons" style="color:red">block</i>
+                                <i class="material-icons" style="color:red">delete</i>
                             @endif
                         </td>
-                        <td class="align-middle">
-                            <div class="btn-group " >
+                        <td class="align-middle text-lg-center">
+                            <div class="btn-group">
                                 <button type="button"  class="btn-lg bg-info  m-1 text-white"
                                         onclick="editPlan('plans/{{$plan->id}}/edit')">
                                     <i class="fa fa-edit text-white"></i>

@@ -4,6 +4,7 @@
 namespace App\Http\Requests\MP;
 
 
+use App\Models\CampaignDetail;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateAdGroup extends FormRequest
@@ -63,6 +64,13 @@ class UpdateAdGroup extends FormRequest
             }
             if($this->input('period_from_date')>$this->input('period_to_date')){
                 $validator->errors()->add('period_to_date', 'Period To (date) must later than Period From (date)!');
+            }
+            $campaignDetail = CampaignDetail::find($this->input('campaign_id'));
+            if ($this->input('period_from_date')<$campaignDetail->period_from) {
+                $validator->errors()->add('period_from_date', 'AdGroup Period From (date) must later than Campaign Period From (date)!');
+            }
+            if ($this->input('period_to_date')>$campaignDetail->period_from) {
+                $validator->errors()->add('period_to_date', 'AdGroup Period To (date) must earlier than Campaign Period To (date)!');
             }
         });
     }

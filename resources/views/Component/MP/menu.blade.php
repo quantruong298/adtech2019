@@ -20,10 +20,10 @@
                     <a class="nav-link text-left" href="{{ route('ads.index') }}">
                         <i class="fa fa-cube"></i> Ads Management</a>
                 </li>
-                <li class="nav-item m-0 p-0">
-                    <a class="nav-link text-left" href="{{ url('mp/reports') }}">
-                        <i class="fa fa-bar-chart "></i> Report Management</a>
-                </li>
+{{--                <li class="nav-item m-0 p-0">--}}
+{{--                    <a class="nav-link text-left" href="{{ url('mp/reports') }}">--}}
+{{--                        <i class="fa fa-bar-chart "></i> Report Management</a>--}}
+{{--                </li>--}}
             </ul>
         </div>
     </div>

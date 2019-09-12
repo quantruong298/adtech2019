@@ -5,16 +5,16 @@
 @section('content')
     <div class="container-fluid d-flex" >
     @include('Component.MP.menu')
-        @if (\Request::is('mp/plans'))
+        @if (\Request::is('mp/plans') or \Request::is('mp/plans/deleted'))
             @component('Component.MP.Plan.index',['plans'=>$plans])
             @endcomponent
-        @elseif (\Request::is('mp/campaigns'))
+        @elseif (\Request::is('mp/campaigns') or \Request::is('mp/campaigns/deleted'))
             @component('Component.MP.Campaign.index',['campaigns'=>$campaigns])
             @endcomponent
-        @elseif(\Request::is('mp/adgroups'))
+        @elseif(\Request::is('mp/adgroups') or \Request::is('mp/adgroups/deleted'))
             @component('Component.MP.AdGroup.index',['adgroups'=>$adgroups])
             @endcomponent
-        @elseif(\Request::is('mp/ads'))
+        @elseif(\Request::is('mp/ads') or \Request::is('mp/ads/deleted'))
             @component('Component.MP.Ads.index',['ads'=>$ads])
             @endcomponent
         @else
@@ -27,6 +27,6 @@
 @endsection
 @section('scripts')
     <script type="text/javascript" src="{{ asset('js/media.js') }}"></script>
-    <script src="https://unpkg.com/bootstrap-table@1.15.4/dist/bootstrap-table.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 @endsection

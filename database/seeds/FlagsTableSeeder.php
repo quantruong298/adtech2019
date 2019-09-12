@@ -12,7 +12,7 @@ class FlagsTableSeeder extends Seeder
      */
     public function run()
     {
-        $flags = ['available', 'deleted', 'suspended'];
+        $flags = ['available','suspended','deleted'];
         $dataInsert = [];
         foreach ($flags as $flag){
             $dataInsert[]=[

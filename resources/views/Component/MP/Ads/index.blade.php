@@ -5,7 +5,12 @@
                 <div >
                     <h2>Ads <b>Management</b></h2>
                 </div>
-                <div class=" p-0 m-0 ml-auto">
+                <div class="p-0 m-0 ml-auto">
+                    @if(\Request::is('mp/ads'))
+                        <a class="mr-5" href="ads/deleted">Click to see deleted Ads</a>
+                    @else
+                        <a class="mr-5" href="{{route('ads.index')}}">&#8592Back</a>
+                    @endif
                     <button onclick="addAd()" class="btn btn-primary" ><i class="fa fa-plus" aria-hidden="true"></i><span> New Add</span></button>
                 </div>
             </div>
@@ -13,10 +18,10 @@
         <table class="table table-striped  table-hover">
             <thead>
             <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Campaign's Name</th>
-                <th>AdGroup's Name</th>
+                <th class="text-lg-center">#</th>
+                <th class="text-lg-center">Name</th>
+                <th class="text-lg-center">Campaign's Name</th>
+                <th class="text-lg-center">AdGroup's Name</th>
 {{--                <th>Media</th>--}}
 {{--                <th>Account</th>--}}
 {{--                <th>KPI</th>--}}
@@ -27,30 +32,38 @@
 {{--                <th>Period Budget</th>--}}
 {{--                <th>Daily Budget</th>--}}
 {{--                <th>Bidding Method</th>--}}
-                <th>Flag</th>
+                <th class="text-lg-center">Status</th>
+                <th class="text-lg-center">Flag</th>
+                <th class="text-lg-center">Action</th>
             </tr>
             </thead>
             <tbody>
             @foreach($ads as $ad)
                 <tr id="rowUser{{$ad->id}}">
-                    <td class="align-middle">{{$ad->id }}</td>
-                    <td class="align-middle">{{$ad->name }}</td>
-                    <td class="align-middle">{{$ad->campaign->name }}</td>
-                    <td class="align-middle">{{$ad->adGroup->name }}</td>
+                    <td class="align-middle text-lg-center">{{$ad->id }}</td>
+                    <td class="align-middle text-lg-center">{{$ad->name }}</td>
+                    <td class="align-middle text-lg-center">{{$ad->campaign->name }}</td>
+                    <td class="align-middle text-lg-center">{{$ad->adGroup->name }}</td>
 {{--                    <td class="align-middle">{{$ad->period_from }}</td>--}}
 {{--                    <td class="align-middle">{{$ad->period_to}}</td>--}}
 {{--                    <td class="align-middle">{{$ad->period_budget}}</td>--}}
-                    <td class="align-middle">
+                    <td class="align-middle text-lg-center">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="status{{$ad->id}}" @if($ad->adDetail->status==1)checked @endif>
+                            <label class="custom-control-label" for="status{{$ad->id}}"></label>
+                        </div>
+                    </td>
+                    <td class="align-middle text-lg-center">
                         @if($ad->flag_id==1)
                             <i class="material-icons" style="color:green">check</i>
                         @elseif($ad->flag_id==2)
-                            <i class="material-icons" style="color:orangered">delete</i>
+                            <i class="material-icons" style="color:orangered">block</i>
                         @else
-                            <i class="material-icons" style="color:red">block</i>
+                            <i class="material-icons" style="color:red">delete</i>
                         @endif
                     </td>
-                    <td class="align-middle">
-                        <div class="btn-group " >
+                    <td class="align-middle text-lg-center">
+                        <div class="btn-group">
                             <button type="button"  class="btn-lg bg-info  m-1 text-white"
                                     onclick="editAd('ads/{{$ad->id}}/edit')">
                                 <i class="fa fa-edit text-white"></i>

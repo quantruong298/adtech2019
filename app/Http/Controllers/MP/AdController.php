@@ -26,10 +26,14 @@ class AdController extends Controller
      */
     public function index()
     {
-        $ads = Ad::orderBy('id', 'desc')->paginate(Pagination::MEDIA_PLAN);
+        $ads = Ad::where('flag_id','!=',3)->orderBy('id', 'desc')->paginate(Pagination::MEDIA_PLAN);
         return view('Component.MP.dashboard',compact('ads'));
     }
-
+    public function deleted()
+    {
+        $ads = Ad::where('flag_id',3)->orderBy('id', 'desc')->paginate(Pagination::MEDIA_PLAN);
+        return view('Component.MP.dashboard',compact('ads'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -59,7 +63,6 @@ class AdController extends Controller
         $ad->campaign_id = AdGroup::find($request->ad_group_id)->campaign_id;
         $ad->ad_group_id = $request->ad_group_id;
         $ad->flag_id = 1;
-        $ad->save();
         $adDetail = new AdDetail();
         $adDetail->creative_type_id = $request->creative_type_id;
         $adDetail->creative_preview = $this->uploadFile($request->file('creative_preview'));
@@ -75,6 +78,7 @@ class AdController extends Controller
         $adDetail->std_daily_budget = $request->std_daily_budget;
         $adDetail->std_bidding_method_id = AdGroupDetail::find($request->ad_group_id)->std_bidding_method_id;
         $adDetail->std_bidding_amount = $request->std_daily_budget;
+        $ad->save();
         $ad->adDetail()->save($adDetail);
         return $ad->name;
     }
@@ -118,7 +122,6 @@ class AdController extends Controller
         $ad->campaign_id = AdGroup::find($request->ad_group_id)->campaign_id;
         $ad->ad_group_id = $request->ad_group_id;
         $ad->flag_id = 1;
-        $ad->save();
         $adDetail = AdDetail::find($id);
         $adDetail->creative_type_id = $request->creative_type_id;
         $adDetail->creative_preview = $request->creative_preview;
@@ -135,6 +138,7 @@ class AdController extends Controller
         $adDetail->std_bidding_method_id = AdGroupDetail::find($request->ad_group_id)->std_bidding_method_id;
         $adDetail->std_bidding_amount = $request->std_daily_budget;
         $ad->adDetail()->save($adDetail);
+        $ad->save();
         return $ad->name;
     }
 

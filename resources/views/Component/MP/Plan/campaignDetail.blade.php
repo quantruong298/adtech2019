@@ -4,12 +4,12 @@
             <input type="text" name="" value="{{$campaign->name}}" disabled>
         </div>
         <div>
-            <label class="col-4">Period From</label>
-            <input type="text" name="" value="{{$campaign->campaignDetail->period_from}}" disabled>
+            <label class="col-4">Campaign's Period From</label>
+            <input type="text" name="" value="{{date("m-d-Y H:i:s", strtotime($campaign->campaignDetail->period_from))}}" disabled>
         </div>
         <div>
-            <label class="col-4">Period To</label>
-            <input type="text" name="" value="{{$campaign->campaignDetail->period_to}}" disabled>
+            <label class="col-4">Campaign's Period To</label>
+            <input type="text" name="" value="{{date("m-d-Y H:i:s", strtotime($campaign->campaignDetail->period_to))}}" disabled>
         </div>
         <div>
             <label class="col-4">Period Buget</label>

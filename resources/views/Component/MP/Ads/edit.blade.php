@@ -86,6 +86,29 @@
                             <div class="panel-body">
                                 <div class="panel-body-content">
                                     <div class="form-group row">
+                                        <label for="creative-preview-add"
+                                               class="col-2 col-form-label">Flag</label>
+                                        <div class="form-check col-3">
+                                            <input class="form-check-input" type="radio" name="flag_id" id="exampleRadios1" value="1" @if($ad->flag_id==1) checked @endif>
+
+                                            <label class="form-check-label" for="exampleRadios1">
+                                                Available <i class="material-icons" style="color:green">check</i>
+                                            </label>
+                                        </div>
+                                        <div class="form-check col-3">
+                                            <input class="form-check-input" type="radio" name="flag_id" id="exampleRadios1" value="2" @if($ad->flag_id==2) checked @endif>
+                                            <label class="form-check-label" for="exampleRadios1">
+                                                Suspended <i class="material-icons" style="color:orangered">block</i>
+                                            </label>
+                                        </div>
+                                        <div class="form-check col-3">
+                                            <input class="form-check-input" type="radio" name="flag_id" id="exampleRadios1" value="3" @if($ad->flag_id==3) checked @endif>
+                                            <label class="form-check-label" for="exampleRadios1">
+                                                Deleted <i class="material-icons" style="color:red">delete</i>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
                                         <label for="example-text-input"
                                                class="col-2 col-form-label">Creative Type</label>
                                         <div class="col-4">

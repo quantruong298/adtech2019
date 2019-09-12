@@ -19,7 +19,12 @@ class PlanController extends Controller
      */
     public function index()
     {
-        $plans = Plan::orderBy('id', 'desc')->paginate(5);
+        $plans = Plan::where('flag_id','!=',3)->orderBy('id', 'desc')->paginate(5);
+        return view('Component.MP.dashboard',compact('plans'));
+    }
+    public function deleted()
+    {
+        $plans = Plan::where('flag_id',3)->orderBy('id', 'desc')->paginate(5);
         return view('Component.MP.dashboard',compact('plans'));
     }
     public function getCampaign($id){

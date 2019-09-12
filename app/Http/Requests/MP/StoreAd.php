@@ -4,6 +4,7 @@
 namespace App\Http\Requests\MP;
 
 
+use App\Models\AdGroupDetail;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreAd extends FormRequest
@@ -49,7 +50,7 @@ class StoreAd extends FormRequest
             if ($this->input('ads_period_budget')<$this->input('std_daily_budget')) {
                 $validator->errors()->add('std_daily_budget', 'Daily Budget must less than Period Budget!');
             }
-            if ($this->input('ag_period_budget')<$this->input('std_bidding_amount')) {
+            if ($this->input('ads_period_budget')<$this->input('std_bidding_amount')) {
                 $validator->errors()->add('std_bidding_amount', 'Bidding Amount must less than Period Budget!');
             }
             if ($this->input('ads_period_budget')<$this->input('cost_bidding')) {
@@ -70,6 +71,13 @@ class StoreAd extends FormRequest
             }
             if($this->input('period_from_date')>$this->input('period_to_date')){
                 $validator->errors()->add('period_to_date', 'Period To (date) must later than Period From (date)!');
+            }
+            $adGroupDetail = AdGroupDetail::find($this->input('ad_group_id'));
+            if ($this->input('period_from_date')<$adGroupDetail->period_from) {
+                $validator->errors()->add('period_from_date', 'Ad Period From (date) must later than AdGroup Period From (date)!');
+            }
+            if ($this->input('period_to_date')>$adGroupDetail->period_from) {
+                $validator->errors()->add('period_to_date', 'Ad Period To (date) must earlier than AdGroup Period To (date)!');
             }
         });
     }

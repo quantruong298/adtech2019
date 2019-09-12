@@ -24,7 +24,7 @@
                     </div>
                     <div class="form-group row">
                         <label for="example-text-input"
-                               class="col-2 col-form-label">Period from</label>
+                               class="col-2 col-form-label">Plan's Period from</label>
                         <div class="col-4">
                             <input class="form-control"
                                    type="date"
@@ -46,7 +46,7 @@
                     </div>
                     <div class="form-group row">
                         <label for="example-text-input"
-                               class="col-2 col-form-label">Period to</label>
+                               class="col-2 col-form-label">Plan's Period to</label>
                         <div class="col-4">
                             <input class="form-control"
                                    type="date"
@@ -93,7 +93,7 @@
                                     id="ag-media-add" onchange="getCampaignDetail(this)">
                                 <option disabled selected>Choose campaign</option>
                                 @foreach($campaigns as $campaign)
-                                    <option value="{{$campaign->id}}">{{$campaign->name}}</option>
+                                    <option value={{$campaign->id}}>{{$campaign->name}}</option>
                                 @endforeach
                             </select>
                             <span class="text-danger">

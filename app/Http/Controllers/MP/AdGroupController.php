@@ -21,10 +21,14 @@ class AdGroupController extends Controller
      */
     public function index()
     {
-        $adgroups = AdGroup::orderBy('id', 'desc')->paginate(Pagination::MEDIA_PLAN);
+        $adgroups = AdGroup::where('flag_id','!=',3)->orderBy('id', 'desc')->paginate(Pagination::MEDIA_PLAN);
         return view('Component.MP.dashboard',compact('adgroups'));
     }
-
+    public function deleted()
+    {
+        $adgroups = AdGroup::where('flag_id',3)->orderBy('id', 'desc')->paginate(Pagination::MEDIA_PLAN);
+        return view('Component.MP.dashboard',compact('adgroups'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -47,7 +51,7 @@ class AdGroupController extends Controller
         $adgroup->name=$request->name;
         $adgroup->campaign_id = $request->campaign_id;
         $adgroup->flag_id = 1;
-        $adgroup->save();
+
         $adgroupDetail = new AdGroupDetail();
         $adgroupDetail->period_from = Datetime::handlerDateTime($request->period_from_date, $request->period_from_time);
         $adgroupDetail->period_to=Datetime::handlerDateTime($request->period_to_date, $request->period_to_time);
@@ -57,6 +61,7 @@ class AdGroupController extends Controller
         $adgroupDetail->std_daily_budget=$request->std_daily_budget;
         $adgroupDetail->std_bidding_method_id = Campaign::find($request->campaign_id)->std_bidding_method_id;
         $adgroupDetail->std_bidding_amount = $request->std_bidding_amount;
+        $adgroup->save();
         $adgroup->adGroupDetail()->save($adgroupDetail);
         return $adgroup->adgroup_name;
     }
@@ -98,7 +103,6 @@ class AdGroupController extends Controller
         $adgroup->name=$request->name;
         $adgroup->campaign_id = $request->campaign_id;
         $adgroup->flag_id = 1;
-        $adgroup->save();
         $adgroupDetail = AdGroupDetail::find($id);
         $adgroupDetail->period_from = Datetime::handlerDateTime($request->period_from_date, $request->period_from_time);
         $adgroupDetail->period_to=Datetime::handlerDateTime($request->period_to_date, $request->period_to_time);
@@ -109,6 +113,7 @@ class AdGroupController extends Controller
         $adgroupDetail->std_bidding_method_id = Campaign::find($request->campaign_id)->std_bidding_method_id;
         $adgroupDetail->std_bidding_amount = $request->std_bidding_amount;
         $adgroup->adGroupDetail()->save($adgroupDetail);
+        $adgroup->save();
         return $adgroup->adgroup_name;
     }
 

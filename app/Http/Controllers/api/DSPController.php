@@ -23,6 +23,9 @@ class DSPController extends Controller
         return $ads;
     }
     public function result(Request $request){
-        return response();
+        return response()->json([
+            'status' => 200,
+            'message' => 'OK',
+        ]);
     }
 }

@@ -26,7 +26,7 @@ Route::post('campaigns/{id}/ad-groups', 'api\AdvertiserAccountController@adgroup
 Route::post('campaigns/{id?}/ad-groups/{param?}/ads', 'api\AdvertiserAccountController@ads');
 
 Route::post('bidding', 'api\DSPController@bidding');
-Route::post('result', 'api\DSPController@resutl');
+Route::post('result', 'api\DSPController@result');
 
 Route::post('auth/register', 'api\UserController@register');
 Route::post('auth/login', 'api\SocialAccountController@login');
