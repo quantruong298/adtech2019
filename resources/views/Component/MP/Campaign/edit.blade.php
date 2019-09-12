@@ -7,7 +7,7 @@
                     </button>
                 </div>
                 <div class="modal-body mx-3">
-                    <form method="POST" id="formUpdateCampaign" enctype="multipart/form-data" action="campaigns/{{$campaign->id}}">
+                    <form method="POST" id="formUpdateCampaign" enctype="multipart/form-data" action="{{route('campaigns.update',$campaign->id)}}">
                         @csrf
                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                             <div class="panel panel-default">
@@ -376,6 +376,7 @@
 {{--                            </div>--}}
                         </div>
                         <div class="form-group">
+                            <div class="loading text-center"></div>
                             <button type="button" class="btn btn-primary btn-block"
                                     id="submitFormAdd" onclick="updateCampaign()">UPDATE
                             </button>

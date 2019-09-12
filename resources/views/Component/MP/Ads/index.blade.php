@@ -8,10 +8,10 @@
                 <div class="p-0 m-0 ml-auto">
                     @if(\Request::is('mp/ads'))
                         <a class="mr-5" href="ads/deleted">Click to see deleted Ads</a>
+                        <button onclick="addAd()" class="btn btn-primary" ><i class="fa fa-plus" aria-hidden="true"></i><span> New Add</span></button>
                     @else
                         <a class="mr-5" href="{{route('ads.index')}}">&#8592Back</a>
                     @endif
-                    <button onclick="addAd()" class="btn btn-primary" ><i class="fa fa-plus" aria-hidden="true"></i><span> New Add</span></button>
                 </div>
             </div>
         </div>
@@ -49,8 +49,11 @@
 {{--                    <td class="align-middle">{{$ad->period_budget}}</td>--}}
                     <td class="align-middle text-lg-center">
                         <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="status{{$ad->id}}" @if($ad->adDetail->status==1)checked @endif>
+                            <input type="checkbox" class="custom-control-input" id="status{{$ad->id}}" @if($ad->adDetail->status==1)checked @endif onchange="changeStatus(this,{{$ad->id}})">
                             <label class="custom-control-label" for="status{{$ad->id}}"></label>
+                            <div id="status-{{$ad->id}}">
+{{--                                <div class="lds-dual-ring" style="width:5px;height: 5px;"></div>--}}
+                            </div>
                         </div>
                     </td>
                     <td class="align-middle text-lg-center">
@@ -62,10 +65,11 @@
                             <i class="material-icons" style="color:red">delete</i>
                         @endif
                     </td>
+                    @if(\Request::is('mp/ads'))
                     <td class="align-middle text-lg-center">
                         <div class="btn-group">
                             <button type="button"  class="btn-lg bg-info  m-1 text-white"
-                                    onclick="editAd('ads/{{$ad->id}}/edit')">
+                                    onclick="editAd('{{route("ads.edit",$ad->id)}}')">
                                 <i class="fa fa-edit text-white"></i>
                             </button>
                             {{--                                                            @if(($campaign->role_id) != (\App\Enums\UserEnums::ADMIN))--}}
@@ -77,6 +81,16 @@
                             {{--                                                            @endif--}}
                         </div>
                     </td>
+                    @else
+                        <td class="align-middle text-lg-center">
+                            <div class="btn-group">
+                                <button type="button"  class="btn-lg bg-info  m-1 text-white"
+                                        onclick="recoverAd('{{route("ads.recover",$ad->id)}}')">
+                                    <i class="fa fa-undo text-white"></i>
+                                </button>
+                            </div>
+                        </td>
+                    @endif
                 </tr>
             @endforeach
             </tbody>

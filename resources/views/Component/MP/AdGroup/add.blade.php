@@ -55,7 +55,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div id="campaignDetail"></div>
+                                        <div class="campaignDetail"></div>
                                     </div>
                                 </div>
                             </div>
@@ -321,6 +321,7 @@
                     {{--                            </div>--}}
                 </div>
                 <div class="form-group">
+                    <div class="loading text-center"></div>
                     <button type="button" class="btn btn-primary btn-block"
                             id="submitFormAdd" onclick="storeAdGroup()">CREATE
                     </button>

@@ -15,7 +15,7 @@ class AdGroupsTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
         $flags = DB::table('flags')->get()->pluck('id')->toArray();
-        $campaignIds = DB::table('campaigns')->get()->pluck('id')->toArray();
+        $campaignIds = DB::table('campaigns')->where('flag_id','!=',3)->get()->pluck('id')->toArray();
         for ($i = 0; $i < 100; $i++) {
             $campaignId = $faker->randomElement($campaignIds);
             $dataAdGroupsInsert[] = [

@@ -69,7 +69,7 @@ class UpdateAdGroup extends FormRequest
             if ($this->input('period_from_date')<$campaignDetail->period_from) {
                 $validator->errors()->add('period_from_date', 'AdGroup Period From (date) must later than Campaign Period From (date)!');
             }
-            if ($this->input('period_to_date')>$campaignDetail->period_from) {
+            if ($this->input('period_to_date')>$campaignDetail->period_to) {
                 $validator->errors()->add('period_to_date', 'AdGroup Period To (date) must earlier than Campaign Period To (date)!');
             }
         });

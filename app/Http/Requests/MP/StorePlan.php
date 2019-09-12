@@ -46,12 +46,14 @@ class StorePlan extends  FormRequest
             if($this->input('period_from_date')>$this->input('period_to_date')){
                 $validator->errors()->add('period_to_date', 'Plan Period To (date) must later than Plan Period From (date)!');
             }
-            $campaignDetail = CampaignDetail::find($this->input('campaign_id'));
-            if ($this->input('period_from_date')>$campaignDetail->period_from) {
-                $validator->errors()->add('period_from_date', 'Plan Period From (date) must earlier than Campaign Period From (date)!');
-            }
-            if ($this->input('period_to_date')<$campaignDetail->period_from) {
-                $validator->errors()->add('period_to_date', 'Plan Period To (date) must later than Campaign Period To (date)!');
+            if($this->input('campaign_id')!=null){
+                $campaignDetail = CampaignDetail::find($this->input('campaign_id'));
+                if ($this->input('period_from_date')>$campaignDetail->period_from) {
+                    $validator->errors()->add('period_from_date', 'Plan Period From (date) must earlier than Campaign Period From (date)!');
+                }
+                if ($this->input('period_to_date')<$campaignDetail->period_to) {
+                    $validator->errors()->add('period_to_date', 'Plan Period To (date) must later than Campaign Period To (date)!');
+                }
             }
         });
     }

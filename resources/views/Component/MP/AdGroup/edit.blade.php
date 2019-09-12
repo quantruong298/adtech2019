@@ -7,7 +7,7 @@
             </button>
         </div>
         <div class="modal-body mx-3">
-            <form method="POST" id="formUpdateAdGroup" enctype="multipart/form-data" action="adgroups/{{$adGroup->id}}">
+            <form method="POST" id="formUpdateAdGroup" enctype="multipart/form-data" action="{{route('adgroups.update',$adGroup->id)}}">
                 @csrf
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
@@ -44,7 +44,7 @@
                                         <div class="col-4">
                                             <select class="form-control"
                                                     name="campaign_id"
-                                                    id="adgroup-media-add">
+                                                    id="adgroup-media-add" onchange="getCampaignDetail(this)">
                                                 @foreach($campaigns as $campaign)
                                                     <option value="{{$campaign->id}}" @if($campaign->id==$adGroup->campaign_id) selected @endif>{{$campaign->name}}</option>
                                                 @endforeach
@@ -53,6 +53,9 @@
                                                   <strong id="error-campaign"></strong>
                                             </span>
                                         </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="campaignDetail"></div>
                                     </div>
                                 </div>
                             </div>
@@ -82,6 +85,9 @@
                                                    name="period_from_date"
                                                    id="adgroup-start-day-add"
                                                    value={{$pf[0]}}>
+                                            <span class="text-danger">
+                                                <strong id="error-period-from-date"></strong>
+                                            </span>
                                         </div>
                                         <div class="col-4">
                                             <input class="form-control"
@@ -89,6 +95,9 @@
                                                    name="period_from_time"
                                                    id="adgroup-start-time-add"
                                                    value={{$pf[1]}}>
+                                            <span class="text-danger">
+                                                <strong id="error-period-from-time"></strong>
+                                            </span>
                                         </div>
                                         <span class="text-danger">
                                                   <strong id="error-period-from"></strong>
@@ -104,6 +113,9 @@
                                                    name="period_to_date"
                                                    id="adgroup-end-day-add"
                                                    value={{$pt[0]}}>
+                                            <span class="text-danger">
+                                                <strong id="error-period-to-date"></strong>
+                                            </span>
                                         </div>
                                         <div class="col-4">
                                             <input class="form-control"
@@ -111,6 +123,9 @@
                                                    name="period_to_time"
                                                    id="adgroup-end-time-add"
                                                    value={{$pt[1]}}>
+                                            <span class="text-danger">
+                                                <strong id="error-period-to-time"></strong>
+                                            </span>
                                         </div>
                                         <span class="text-danger">
                                                   <strong id="error-period-to"></strong>
@@ -320,6 +335,7 @@
                     {{--                            </div>--}}
                 </div>
                 <div class="form-group">
+                    <div class="loading text-center"></div>
                     <button type="button" class="btn btn-primary btn-block"
                             id="submitFormAdd" onclick="updateAdGroup()">UPDATE
                     </button>

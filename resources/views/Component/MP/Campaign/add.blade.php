@@ -364,6 +364,7 @@
 {{--                            </div>--}}
                         </div>
                         <div class="form-group">
+                            <div class="loading text-center"></div>
                             <button type="button" class="btn btn-primary btn-block" onclick="storeCampaign()">
                                 CREATE
                             </button>

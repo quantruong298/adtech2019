@@ -39,8 +39,11 @@
             <td class="align-middle text-lg-center">{{$ad->adGroup->name }}</td>
             <td class="align-middle text-lg-center">
                 <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" id="customSwitch1" @if($ad->adDetail->status==1)checked @endif>
-                    <label class="custom-control-label" for="customSwitch1"></label>
+                    <input type="checkbox" class="custom-control-input" id="status{{$ad->id}}" @if($ad->adDetail->status==1)checked @endif onchange="changeStatus(this,{{$ad->id}})">
+                    <label class="custom-control-label" for="status{{$ad->id}}"></label>
+                    <div id="status-{{$ad->id}}">
+                        {{--                                <div class="lds-dual-ring" style="width:5px;height: 5px;"></div>--}}
+                    </div>
                 </div>
             </td>
             <td class="align-middle text-lg-center">

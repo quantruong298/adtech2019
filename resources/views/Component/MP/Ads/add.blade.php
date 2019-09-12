@@ -59,7 +59,7 @@
                                                     id="ad-adgroup-id-add" onchange="getAdGroupDetail(this)">
                                                 <option disabled selected>Choose AdGroup</option>
                                                 @foreach($adgroups as $adgroup)
-                                                    <option value="{{$adgroup->id}}">{{$adgroup->name}}</option>
+                                                    <option value={{$adgroup->id}}>{{$adgroup->name}}</option>
                                                 @endforeach
                                             </select>
                                             <span class="text-danger">
@@ -68,7 +68,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div id="adgroupDetail"></div>
+                                        <div class="adgroupDetail"></div>
                                     </div>
                                 </div>
                             </div>
@@ -121,9 +121,8 @@
                                     <div class="form-group row">
                                         <label for="example-text-input"
                                                class="col-2 col-form-label"></label>
-                                        <div class="col-4" id="preview-image-wrap" hidden>
-                                            <img id="preview-image" src="#" alt="preview image"
-                                            />
+                                        <div class="col-4" id="preview-image-wrap">
+                                            <img class="preview-image" src="https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg" alt="preview image"/>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -438,6 +437,7 @@
                     {{--                            </div>--}}
                 </div>
                 <div class="form-group">
+                    <div class="loading text-center"></div>
                     <button type="button" class="btn btn-primary btn-block"
                             id="submitFormAdd" onclick="storeAd()">CREATE
                     </button>

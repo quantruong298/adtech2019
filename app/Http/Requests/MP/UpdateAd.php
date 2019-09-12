@@ -30,7 +30,7 @@ class UpdateAd extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'ad_group_id' => ['required', 'integer'],
             'creative_type_id' => ['required', 'integer'],
-            'creative_preview' => ['required', 'string'],
+//            'creative_preview' => ['required', 'string'],
             'url' => ['required', 'string'],
             'cost_bidding' => ['required', 'integer'],
             'period_from_date'=>['required','date'],
@@ -50,7 +50,7 @@ class UpdateAd extends FormRequest
             if ($this->input('ads_period_budget')<$this->input('std_daily_budget')) {
                 $validator->errors()->add('std_daily_budget', 'Daily Budget must less than Period Budget!');
             }
-            if ($this->input('ag_period_budget')<$this->input('std_bidding_amount')) {
+            if ($this->input('ads_period_budget')<$this->input('std_bidding_amount')) {
                 $validator->errors()->add('std_bidding_amount', 'Bidding Amount must less than Period Budget!');
             }
             if ($this->input('ads_period_budget')<$this->input('cost_bidding')) {
@@ -76,7 +76,7 @@ class UpdateAd extends FormRequest
             if ($this->input('period_from_date')<$adGroupDetail->period_from) {
                 $validator->errors()->add('period_from_date', 'Ad Period From (date) must later than AdGroup Period From (date)!');
             }
-            if ($this->input('period_to_date')>$adGroupDetail->period_from) {
+            if ($this->input('period_to_date')>$adGroupDetail->period_to) {
                 $validator->errors()->add('period_to_date', 'Ad Period To (date) must earlier than AdGroup Period To (date)!');
             }
         });

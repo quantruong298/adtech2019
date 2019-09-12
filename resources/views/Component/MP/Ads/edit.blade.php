@@ -7,7 +7,8 @@
             </button>
         </div>
         <div class="modal-body mx-3">
-            <form method="POST" id="formUpdateAd" enctype="multipart/form-data" action="ads/{{$ad->id}}">
+            <form method="POST" id="formUpdateAd" enctype="multipart/form-data" action="{{route('ads.update',$ad->id)}}">
+                @method('PUT')
                 @csrf
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
@@ -57,7 +58,7 @@
                                         <div class="col-4">
                                             <select class="form-control"
                                                     name="ad_group_id"
-                                                    id="ad-adgroup-id-add">
+                                                    id="ad-adgroup-id-add" onchange="getAdGroupDetail(this)">
                                                 @foreach($adgroups as $adgroup)
                                                     <option value="{{$adgroup->id}}" @if($adgroup->id==$ad->ad_group_id) selected @endif>{{$adgroup->name}}</option>
                                                 @endforeach
@@ -66,6 +67,9 @@
                                                   <strong id="error-adgroup"></strong>
                                             </span>
                                         </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="adgroupDetail"></div>
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +94,6 @@
                                                class="col-2 col-form-label">Flag</label>
                                         <div class="form-check col-3">
                                             <input class="form-check-input" type="radio" name="flag_id" id="exampleRadios1" value="1" @if($ad->flag_id==1) checked @endif>
-
                                             <label class="form-check-label" for="exampleRadios1">
                                                 Available <i class="material-icons" style="color:green">check</i>
                                             </label>
@@ -141,7 +144,7 @@
                                         <label for="example-text-input"
                                                class="col-2 col-form-label"></label>
                                         <div class="col-4" id="preview-image-wrap">
-                                            <img id="preview-image" src="{{$ad->adDetail->creative_preview}}" alt="preview image"/>
+                                            <img class="preview-image" src="{{\JD\Cloudder\Facades\Cloudder::show($ad->adDetail->creative_preview)}}" alt="preview image"/>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -212,6 +215,7 @@
                             <div class="panel-body">
                                 <div class="panel-body-content">
                                     <div class="form-group row">
+                                        @php($pf = explode(' ',$ad->adDetail->period_from))
                                         <label for="example-text-input"
                                                class="col-2 col-form-label">Period from</label>
                                         <div class="col-4">
@@ -219,9 +223,9 @@
                                                    type="date"
                                                    name="period_from_date"
                                                    id="ad-start-day-add"
-                                                   value="2019-06-05">
+                                                   value={{$pf[0]}}>
                                             <span class="text-danger">
-                                                  <strong id="error-period-from"></strong>
+                                                  <strong id="error-period-from-date"></strong>
                                             </span>
                                         </div>
                                         <div class="col-4">
@@ -229,10 +233,14 @@
                                                    type="time"
                                                    name="period_from_time"
                                                    id="ad-start-time-add"
-                                                   value="13:45:00">
+                                                   value={{$pf[1]}}>
+                                            <span class="text-danger">
+                                                  <strong id="error-period-from-time"></strong>
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
+                                        @php($pt = explode(' ',$ad->adDetail->period_to))
                                         <label for="example-text-input"
                                                class="col-2 col-form-label">Period to</label>
                                         <div class="col-4">
@@ -240,18 +248,21 @@
                                                    type="date"
                                                    name="period_to_date"
                                                    id="ad-end-day-add"
-                                                   value="2019-06-17">
+                                                   value={{$pt[0]}}>
+                                            <span class="text-danger">
+                                                  <strong id="error-period-to-date"></strong>
+                                            </span>
                                         </div>
                                         <div class="col-4">
                                             <input class="form-control"
                                                    type="time"
                                                    name="period_to_time"
                                                    id="ad-end-time-add"
-                                                   value="13:45:00">
-                                        </div>
-                                        <span class="text-danger">
-                                                  <strong id="error-period-to"></strong>
+                                                   value={{$pt[1]}}>
+                                            <span class="text-danger">
+                                                  <strong id="error-period-to-time"></strong>
                                             </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -457,6 +468,7 @@
                     {{--                            </div>--}}
                 </div>
                 <div class="form-group">
+                    <div class="loading text-center"></div>
                     <button type="button" class="btn btn-primary btn-block"
                             id="submitFormAdd" onclick="updateAd()">UPDATE
                     </button>

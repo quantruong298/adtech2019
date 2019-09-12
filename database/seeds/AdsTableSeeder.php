@@ -15,21 +15,23 @@ class AdsTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
         $flags = DB::table('flags')->get()->pluck('id')->toArray();
-        $adGroups = DB::table('ad_groups')->select('id', 'campaign_id')->get()->toArray();
+        $adGroups = DB::table('ad_groups')->where('flag_id','!=',3)->select('id', 'campaign_id')->get()->toArray();
         $creativeTypeIds = DB::table('creative_types')->get()->pluck('id')->toArray();
         for ($i = 0; $i < 300; $i++) {
+            $flagId = $faker->randomElement($flags);
             $adGroup = $faker->randomElement($adGroups);
             $dataAdsInsert[] = [
                 'name'=>$faker->name,
                 'campaign_id' =>$adGroup->campaign_id,
                 'ad_group_id'=>$adGroup->id,
-                'flag_id' => $faker->randomElement($flags),
+                'flag_id' => $flagId,
             ];
             $adGroupDetail = DB::table('ad_groups_detail')->where('id',$adGroup->id)->first();
             $adPeriodFrom = $faker->dateTimeBetween($adGroupDetail->period_from,$adGroupDetail->period_to);
             $adPeriodBudget = rand(5000000,$adGroupDetail->ag_period_budget);
             $adPeriodBudgetFrom = rand(50000,$adPeriodBudget);
-            $status = $faker->boolean;
+            if($flagId==3) $status=0;
+            else $status = $faker->boolean;
             $dataAdsDetailInsert[]=[
                 'status'=>$status,
                 'creative_type_id'=>$faker->randomElement($creativeTypeIds),

@@ -8,10 +8,11 @@
                 <div class=" p-0 m-0 ml-auto">
                     @if(\Request::is('mp/campaigns'))
                         <a class="mr-5" href="campaigns/deleted">Click to see deleted Campaigns</a>
+                        <button onclick="addCampaign('campaigns/create')" class="btn btn-primary" ><i class="fa fa-plus" aria-hidden="true"></i><span> New Campaign</span></button>
                     @else
                         <a class="mr-5" href="{{route('campaigns.index')}}">&#8592Back</a>
                     @endif
-                    <button onclick="addCampaign('campaigns/create')" class="btn btn-primary" ><i class="fa fa-plus" aria-hidden="true"></i><span> New Campaign</span></button>
+
                 </div>
             </div>
         </div>
@@ -63,10 +64,11 @@
                             <i class="material-icons" style="color:red">delete</i>
                         @endif
                     </td>
+                    @if(\Request::is('mp/campaigns'))
                     <td class="align-middle text-lg-center">
                         <div class="btn-group">
                             <button type="button"  class="btn-lg bg-info  m-1 text-white"
-                                    onclick="editCampaign('campaigns/{{$campaign->id}}/edit')">
+                                    onclick="editCampaign('{{route("campaigns.edit",$campaign->id)}}')">
                                 <i class="fa fa-edit text-white"></i>
                             </button>
 {{--                                                            @if(($campaign->role_id) != (\App\Enums\UserEnums::ADMIN))--}}
@@ -77,8 +79,8 @@
 
 {{--                                                            @endif--}}
                         </div>
-
                     </td>
+                    @endif
                 </tr>
             @endforeach
             </tbody>

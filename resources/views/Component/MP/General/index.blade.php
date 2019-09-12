@@ -54,7 +54,7 @@
                 <td class="align-middle text-lg-center">
                     <div class="btn-group">
                         <button type="button"  class="btn-lg bg-info  m-1 text-white"
-                                onclick="editCampaign('mp/campaigns/{{$campaign->id}}/edit')">
+                                onclick="editCampaign('{{route("campaigns.edit",$campaign->id)}}')">
                             <i class="fa fa-edit text-white"></i>
                         </button>
                         {{--                                                            @if(($campaign->role_id) != (\App\Enums\UserEnums::ADMIN))--}}

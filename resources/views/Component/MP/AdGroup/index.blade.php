@@ -8,10 +8,10 @@
                 <div class=" p-0 m-0 ml-auto">
                     @if(\Request::is('mp/adgroups'))
                         <a class="mr-5" href="adgroups/deleted">Click to see deleted AdGroups</a>
+                        <button onclick="addAdGroup()" class="btn btn-primary" ><i class="fa fa-plus" aria-hidden="true"></i><span> New AdGroup</span></button>
                     @else
                         <a class="mr-5" href="{{route('adgroups.index')}}">&#8592Back</a>
                     @endif
-                    <button onclick="addAdGroup()" class="btn btn-primary" ><i class="fa fa-plus" aria-hidden="true"></i><span> New AdGroup</span></button>
                 </div>
             </div>
         </div>
@@ -52,10 +52,11 @@
                                 <i class="material-icons" style="color:red">delete</i>
                             @endif
                         </td>
+                        @if(\Request::is('mp/adgroups'))
                         <td class="align-middle text-lg-center">
                             <div class="btn-group">
                                 <button type="button"  class="btn-lg bg-info  m-1 text-white"
-                                        onclick="editAdGroup('adgroups/{{$adgroup->id}}/edit')">
+                                        onclick="editAdGroup('{{route("adgroups.edit",$adgroup->id)}}')">
                                     <i class="fa fa-edit text-white"></i>
                                 </button>
                                 {{--                                                            @if(($campaign->role_id) != (\App\Enums\UserEnums::ADMIN))--}}
@@ -66,8 +67,8 @@
 
                                 {{--                                                            @endif--}}
                             </div>
-
                         </td>
+                        @endif
                     </tr>
                 @endforeach
                 </tbody>

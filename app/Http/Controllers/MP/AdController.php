@@ -64,6 +64,7 @@ class AdController extends Controller
         $ad->ad_group_id = $request->ad_group_id;
         $ad->flag_id = 1;
         $adDetail = new AdDetail();
+        $adDetail->status = 1;
         $adDetail->creative_type_id = $request->creative_type_id;
         $adDetail->creative_preview = $this->uploadFile($request->file('creative_preview'));
         $adDetail->url = $request->url;
@@ -115,16 +116,39 @@ class AdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function status($id,$status){
+        $adDetail = AdDetail::find($id);
+        if($status=='true'){
+            $adDetail->status=1;
+        }
+        else{
+            $adDetail->status=0;
+        }
+        $adDetail->save();
+        return $status;
+    }
+    public function recover($id){
+        $ad = Ad::find($id);
+        $ad->flag_id = 1;
+        $ad->save();
+        return $ad;
+    }
     public function update(UpdateAd $request, $id)
     {
         $ad = Ad::find($id);
         $ad->name = $request->name;
         $ad->campaign_id = AdGroup::find($request->ad_group_id)->campaign_id;
         $ad->ad_group_id = $request->ad_group_id;
-        $ad->flag_id = 1;
+        $ad->flag_id = $request->flag_id;
         $adDetail = AdDetail::find($id);
+        if($request->flag_id==3){
+            $adDetail->status = 0;
+        }
         $adDetail->creative_type_id = $request->creative_type_id;
-        $adDetail->creative_preview = $request->creative_preview;
+        if ($request->creative_preview!=null){
+            Cloudder::delete($adDetail->creative_preview);
+            $adDetail->creative_preview = $this->uploadFile($request->file('creative_preview'));
+        }
         $adDetail->url = $request->url;
         $adDetail->spent = 111;
         $adDetail->click_through_rate = 111;
@@ -154,6 +178,7 @@ class AdController extends Controller
     }
     public function uploadFile($file){
         Cloudder::upload($file);
-        return "http://res.cloudinary.com/hfmikccfm/image/upload/".Cloudder::getPublicId().".jpg";
+//        return "http://res.cloudinary.com/hfmikccfm/image/upload/".Cloudder::getPublicId().".jpg";
+        return Cloudder::getPublicId();
     }
 }

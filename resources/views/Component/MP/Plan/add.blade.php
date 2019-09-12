@@ -112,11 +112,12 @@
 {{--                        </ul>--}}
 {{--                    </div>--}}
                     <div class="form-group">
-                        <div id="campaignDetail"></div>
+                        <div class="campaignDetail"></div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
+                <div class="loading text-center"></div>
                 <button type="button" class="btn btn-primary" onclick="storePlan()">Create</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>

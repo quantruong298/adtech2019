@@ -103,6 +103,7 @@ function editPlan(url) {
     });
 }
 function updateCampaign() {
+    $('.loading').html("<div class=\"lds-dual-ring\"></div>");
     var form = $("#formUpdateCampaign");
    var url = form.attr('action');
     $.ajax({
@@ -110,6 +111,7 @@ function updateCampaign() {
         data: form.serialize(),
         type: "put",
         success: function (data) {
+            $('.loading').empty();
             Swal.fire({
                 type: 'success',
                 title: 'Update Campaign complete',
@@ -118,6 +120,7 @@ function updateCampaign() {
             location.reload();
         },
         error: function (XMLHttpRequest) {
+            $('.loading').empty();
             errors = XMLHttpRequest.responseJSON.errors;
             console.log(errors);
             $('#error-name').empty().html(errors.name);
@@ -137,6 +140,7 @@ function updateCampaign() {
     })
 }
 function updateAdGroup() {
+    $('.loading').html("<div class=\"lds-dual-ring\"></div>");
     var form = $("#formUpdateAdGroup");
     var url = form.attr('action');
     $.ajax({
@@ -144,6 +148,7 @@ function updateAdGroup() {
         data: form.serialize(),
         type: "put",
         success: function (data) {
+            $('.loading').empty();
             Swal.fire({
                 type: 'success',
                 title: 'Update AdGroup complete',
@@ -152,6 +157,7 @@ function updateAdGroup() {
             location.reload();
         },
         error: function (XMLHttpRequest) {
+            $('.loading').empty();
             errors = XMLHttpRequest.responseJSON.errors;
             console.log(errors);
             $('#error-name').empty().html(errors.name);
@@ -170,6 +176,7 @@ function updateAdGroup() {
     })
 }
 function updateAd() {
+    $('.loading').html("<div class=\"lds-dual-ring\"></div>");
     var form = $("#formUpdateAd");
     var url = form.attr('action');
     var formData = new FormData(form[0]);
@@ -179,8 +186,9 @@ function updateAd() {
         cache: false,
         processData: false,
         contentType: false,
-        type: "put",
+        type: "post",
         success: function (data) {
+            $('.loading').empty();
             Swal.fire({
                 type: 'success',
                 title: 'Update Ad complete',
@@ -189,6 +197,7 @@ function updateAd() {
             location.reload();
         },
         error: function (XMLHttpRequest) {
+            $('.loading').empty();
             errors = XMLHttpRequest.responseJSON.errors;
             console.log(errors);
             $('#error-name').empty().html(errors.name);
@@ -210,6 +219,7 @@ function updateAd() {
     })
 }
 function updatePlan() {
+    $('.loading').html("<div class=\"lds-dual-ring\"></div>");
     var form = $("#formUpdatePlan");
     var url = form.attr('action');
     $.ajax({
@@ -217,6 +227,7 @@ function updatePlan() {
         data: form.serialize(),
         type: "put",
         success: function (data) {
+            $('.loading').empty();
             console.log(data);
             Swal.fire({
                 type: 'success',
@@ -226,6 +237,7 @@ function updatePlan() {
             location.reload();
         },
         error: function (XMLHttpRequest) {
+            $('.loading').empty();
             errors = XMLHttpRequest.responseJSON.errors;
             console.log(errors);
             $('#error-area-name').empty().html(errors.area_name);
@@ -238,6 +250,7 @@ function updatePlan() {
     })
 }
 function storeCampaign(){
+    $('.loading').html("<div class=\"lds-dual-ring\"></div>");
     var form = $("#formAddCampaign");
     var url = form.attr('action');
     $.ajax({
@@ -245,6 +258,7 @@ function storeCampaign(){
         type: "post",
         data: form.serialize(),
         success: function (data) {
+            $('.loading').empty();
             Swal.fire({
                 type: 'success',
                 title: 'Add Campaign complete',
@@ -253,6 +267,7 @@ function storeCampaign(){
             location.reload();
         },
         error: function (XMLHttpRequest) {
+            $('.loading').empty();
             errors = XMLHttpRequest.responseJSON.errors;
             console.log(errors);
             $('#error-name').empty().html(errors.name);
@@ -272,6 +287,7 @@ function storeCampaign(){
     })
 }
 function storeAdGroup() {
+    $('.loading').html("<div class=\"lds-dual-ring\"></div>");
     var form = $("#formAddAdGroup");
     var url = form.attr('action');
     $.ajax({
@@ -279,6 +295,7 @@ function storeAdGroup() {
         data: form.serialize(),
         type: "post",
         success: function (data) {
+            $('.loading').empty();
             console.log(data);
             Swal.fire({
                 type: 'success',
@@ -288,6 +305,7 @@ function storeAdGroup() {
             location.reload();
         },
         error: function (XMLHttpRequest) {
+            $('.loading').empty();
             errors = XMLHttpRequest.responseJSON.errors;
             console.log(errors);
             $('#error-name').empty().html(errors.name);
@@ -306,6 +324,7 @@ function storeAdGroup() {
     })
 }
 function storeAd() {
+    $('.loading').html("<div class=\"lds-dual-ring\"></div>");
     var form = $("#formAddAd");
     var formData = new FormData(form[0]);
     var url = form.attr('action');
@@ -317,6 +336,7 @@ function storeAd() {
         contentType: false,
         type: "post",
         success: function (data) {
+            $('.loading').empty();
             console.log(data);
             Swal.fire({
                 type: 'success',
@@ -326,6 +346,7 @@ function storeAd() {
             location.reload();
         },
         error: function (XMLHttpRequest) {
+            $('.loading').empty();
             errors = XMLHttpRequest.responseJSON.errors;
             console.log(errors);
             $('#error-name').empty().html(errors.name);
@@ -347,6 +368,7 @@ function storeAd() {
     })
 }
 function storePlan() {
+    $('.loading').html("<div class=\"lds-dual-ring\"></div>");
     var form = $("#formAddPlan");
     var url = form.attr('action');
     $.ajax({
@@ -354,6 +376,7 @@ function storePlan() {
         data: form.serialize(),
         type: "post",
         success: function (data) {
+            $('.loading').empty();
             console.log(data);
             Swal.fire({
                 type: 'success',
@@ -363,6 +386,7 @@ function storePlan() {
             location.reload();
         },
         error: function (XMLHttpRequest) {
+            $('.loading').empty();
             errors = XMLHttpRequest.responseJSON.errors;
             console.log(errors);
             $('#error-area-name').empty().html(errors.area_name);
@@ -382,7 +406,7 @@ function getCampaignDetail(e) {
             type: "get",
             datatype: "html",
         }).done(function (data) {
-            $("#campaignDetail").html(data);
+            $(".campaignDetail").html(data);
         }).fail(function (jqXHR, ajaxOptions, thrownError) {
             alert('No response from server');
     });
@@ -394,7 +418,7 @@ function getAdGroupDetail(e) {
             type: "get",
             datatype: "html",
         }).done(function (data) {
-        $("#adgroupDetail").html(data);
+        $(".adgroupDetail").html(data);
     }).fail(function (jqXHR, ajaxOptions, thrownError) {
         alert('No response from server');
     });
@@ -428,9 +452,46 @@ function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-            $('#preview-image-wrap').removeAttr('hidden');
-            $('#preview-image').attr('src', e.target.result);
+            $('.preview-image').attr('src', e.target.result);
         }
         reader.readAsDataURL(input.files[0]);
     }
+}
+function changeStatus(e,id){
+    $("#status-"+id).html("<div class=\"lds-dual-ring\" style=\"width:5px;height:5px;\"></div>");
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax(
+        {
+            url: '/mp/ads/'+id+'/'+e.checked,
+            type: "put",
+            datatype: "html",
+        }).done(function (data) {
+        $('#status-'+id).empty();
+        alert('success');
+    }).fail(function (jqXHR, ajaxOptions, thrownError) {
+        $('#status-'+id).empty();
+        alert('No response from server');
+    });
+}
+function recoverAd(url){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax(
+        {
+            url: url,
+            type: "put",
+            datatype: "html",
+        }).done(function (data) {
+        alert('success');
+        location.reload();
+    }).fail(function (jqXHR, ajaxOptions, thrownError) {
+        alert('No response from server');
+    });
 }

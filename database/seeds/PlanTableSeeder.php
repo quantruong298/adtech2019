@@ -23,14 +23,14 @@ class PlanTableSeeder extends Seeder
                 ->where('campaign_id', '=', $campaign->id)
                 ->select('id')->get()->pluck('id')->toArray();
             for ($i=0;$i<3;$i++) {
-                $periodFrom = $faker->dateTimeBetween($campaign->period_from,$campaign->period_to);
+                $periodFrom = $faker->dateTimeBetween('-60 days',$campaign->period_from);
                 $dataInsert[] = [
                     'media_id' => $campaign->media_id,
                     'campaign_id' => $campaign->id,
                     'ad_group_id'=>$faker->randomElement($adGroupIds),
                     'area_name'=>$faker->domainWord,
                     'period_from'=>$periodFrom,
-                    'period_to'=>$faker->dateTimeBetween($periodFrom,$campaign->period_to),
+                    'period_to'=>$faker->dateTimeBetween($campaign->period_to,'+80 days'),
                     'flag_id'=>$faker->randomElement($flags),
                 ];
             }

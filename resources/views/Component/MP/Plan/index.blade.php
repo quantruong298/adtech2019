@@ -8,10 +8,10 @@
                 <div class=" p-0 m-0 ml-auto">
                     @if(\Request::is('mp/plans'))
                         <a class="mr-5" href="plans/deleted">Click to see deleted Plans</a>
+                        <button onclick="addPlan()" class="btn btn-primary" ><i class="fa fa-plus" aria-hidden="true"></i><span> New Plan</span></button>
                     @else
                         <a class="mr-5" href="{{route('plans.index')}}">&#8592Back</a>
                     @endif
-                    <button onclick="addPlan()" class="btn btn-primary" ><i class="fa fa-plus" aria-hidden="true"></i><span> New Plan</span></button>
                 </div>
             </div>
         </div>
@@ -48,10 +48,11 @@
                                 <i class="material-icons" style="color:red">delete</i>
                             @endif
                         </td>
+                        @if(\Request::is('mp/plans'))
                         <td class="align-middle text-lg-center">
                             <div class="btn-group">
                                 <button type="button"  class="btn-lg bg-info  m-1 text-white"
-                                        onclick="editPlan('plans/{{$plan->id}}/edit')">
+                                        onclick="editPlan('{{route("plans.edit",$plan->id)}}')">
                                     <i class="fa fa-edit text-white"></i>
                                 </button>
                                 {{--                                                            @if(($campaign->role_id) != (\App\Enums\UserEnums::ADMIN))--}}
@@ -62,8 +63,8 @@
 
                                 {{--                                                            @endif--}}
                             </div>
-
                         </td>
+                        @endif
                     </tr>
                 @endforeach
                 </tbody>
