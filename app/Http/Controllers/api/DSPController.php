@@ -27,18 +27,23 @@ class DSPController extends Controller
     public function result(Request $request){
         $results = $request->all();
         foreach ($results as $result){
-             if($result["status"]=="won"){
-                 $adDetail = AdDetail::find($result["ads_id"]);
-                 $currentBudget = $adDetail->ads_period_budget;
-                 $price_won = $result["price_won"];
-                 $adDetail->ads_period_budget = $currentBudget - $price_won;
-                 $adDetail->save();
-                 break;
-             }
+            if($result["status"]=="won"){
+                $adDetail = AdDetail::find($result["ads_id"]);
+                $currentBudget = $adDetail->ads_period_budget;
+                $price_won = $result["price_won"];
+                $adDetail->ads_period_budget = $currentBudget - $price_won;
+                $adDetail->spent = $adDetail->spent + $price_won;
+                $adDetail->save();
+                return response()->json([
+                    'ads_id'=>$result["ads_id"]
+                ]);
+                break;
+            }
+
         }
         return response()->json([
             'status' => 200,
-            'message' => 'OK',
+            'message' => 'No add win'
         ]);
     }
 }
