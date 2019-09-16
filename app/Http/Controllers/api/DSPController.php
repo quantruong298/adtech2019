@@ -25,10 +25,10 @@ class DSPController extends Controller
         return $ads;
     }
     public function result(Request $request){
-        $results = $request->toArray();
+        $results = $request->all();
         foreach ($results as $result){
              if($result["status"]=="won"){
-                 $adDetail = AdDetail::find($result["id"]);
+                 $adDetail = AdDetail::find($result["ads_id"]);
                  $currentBudget = $adDetail->ads_period_budget;
                  $price_won = $result["price_won"];
                  $adDetail->ads_period_budget = $currentBudget - $price_won;
